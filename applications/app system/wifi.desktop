@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=wifi
+Exec=nm-applet
+Icon=network-wireless
+Terminal=false
+Categories=Network;

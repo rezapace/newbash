@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Bluetooth Settings
+Exec=gnome-control-center bluetooth
+Icon=/path/to/bluetooth-icon.png
+Terminal=false

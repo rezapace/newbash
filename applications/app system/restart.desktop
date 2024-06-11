@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=restart
+Exec=reboot
+Icon=/path/to/restart-icon.png
+Terminal=false

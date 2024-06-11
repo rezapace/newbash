@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=controlpanel
+Exec=mate-control-center
+Icon=/usr/share/icons/Adwaita/scalable/categories/preferences-system-settings-symbolic.svg
+Terminal=false

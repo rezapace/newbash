@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=add
+Exec=code /home/r/.local/share/applications
+Icon=folder
+Terminal=true

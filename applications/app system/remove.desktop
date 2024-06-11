@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=remove
+Exec=sh -c 'gio trash --empty'
+Icon=/path/to/recyclebin-icon.png
+Terminal=false

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=sampah
+Exec=caja trash:///
+Icon=/path/to/recyclebin-icon.png
+Terminal=false
