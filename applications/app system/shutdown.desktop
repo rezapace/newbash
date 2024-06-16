@@ -2,6 +2,6 @@
 Version=1.0
 Type=Application
 Name=shutdown
-Exec=pkexec /sbin/shutdown now
+Exec=systemctl pkexec /sbin/shutdown now
 Icon=/path/to/shutdown-icon.png
 Terminal=false

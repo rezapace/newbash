@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=studensite
+Exec=/usr/bin/google-chrome --new-tab https://studentsite.gunadarma.ac.id/index.php/site/login
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

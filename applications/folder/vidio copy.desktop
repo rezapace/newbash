@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=folder htdoc
+Exec=caja /var/www/html
+Icon=folder
+Terminal=true

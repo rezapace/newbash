@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=figma
+Exec=/usr/bin/google-chrome --new-tab https://www.figma.com/files/recents-and-sharing/recently-viewed?fuid=1137639094365196748
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

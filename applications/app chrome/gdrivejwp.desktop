@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=gdrivejwp
+Exec=/usr/bin/google-chrome --new-tab https://drive.google.com/drive/folders/1suziYai9Yjr6_fHTzcofy9JaxD4ntNon
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

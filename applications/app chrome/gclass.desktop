@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=gclass
+Exec=/usr/bin/google-chrome --new-tab https://classroom.google.com/u/0/c/MjkzNjMxOTg4Mzc2
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

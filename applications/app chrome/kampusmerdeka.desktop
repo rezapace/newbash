@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=kampusmerdeka
+Exec=/usr/bin/google-chrome --new-tab https://kampusmerdeka.kemdikbud.go.id/activity/active
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

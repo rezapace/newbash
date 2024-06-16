@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=mistral ai
+Exec=/usr/bin/google-chrome --new-tab https://chat.mistral.ai/chat/e0f17e59-818b-4ce2-a2e3-f868d90f2619
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=folder vidio
+Exec=caja /home/r/Videos
+Icon=folder
+Terminal=true

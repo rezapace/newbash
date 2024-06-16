@@ -2,6 +2,6 @@
 Version=1.0
 Type=Application
 Name=restart
-Exec=reboot
+Exec=systemctl reboot
 Icon=/path/to/restart-icon.png
 Terminal=false

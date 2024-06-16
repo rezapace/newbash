@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=music folder
+Exec=caja /home/r/Music
+Icon=folder
+Terminal=true

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=compiler
+Exec=/usr/bin/google-chrome --new-tab https://www.onlinegdb.com/online_ruby_compiler
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

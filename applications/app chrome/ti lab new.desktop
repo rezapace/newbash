@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=ti lab new
+Exec=/usr/bin/google-chrome --new-tab https://praktikum-iflab.gunadarma.ac.id/mod/assign/view.php?id=2057
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

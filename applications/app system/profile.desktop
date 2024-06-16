@@ -2,6 +2,6 @@
 Version=1.0
 Type=Application
 Name=Profile
-Exec=code ~/.zshrc
+Exec=code /home/r/.zshrc
 Icon=text-editor
 Terminal=false

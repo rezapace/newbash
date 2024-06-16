@@ -69,16 +69,16 @@ setopt hist_find_no_dups
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
-alias up='source ~/.zshrc'
+alias rprofile='source ~/.zshrc'
 alias profile='code ~/.zshrc'
 alias closeall='/home/r/Documents/Backups/close_programs.sh'
 alias g='cd /home/r/github'
@@ -88,9 +88,12 @@ alias cwifi='/home/r/Documents/Backups/cwifi.sh'
 alias e='caja .'
 alias v='code .'
 alias add='code /home/r/.local/share/applications/'
-alias z='j'
 alias hapus='rm -rf'
 alias mod='chmod +x ./'
+alias scursor='cd /opt && sudo -E ./cursor.appimage --no-sandbox'
+alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
+alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
+alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
 
 #alias perintah
 alias mx='chmod a+x'
@@ -111,6 +114,7 @@ alias pstat='sudo systemctl status socket'
 # xampp
 alias ehtdoc='caja /var/www/html'
 alias htdoc='cd /var/www/html'
+alias www='cd /var/www/html'
 
 # Functions
 mkdirg() {
@@ -184,8 +188,64 @@ mvg ()
     fi
 }
 
+cpwd() {
+    if [ -n "$1" ]; then
+        cp -r "$(pwd)" "$1"
+    else
+        pwd | tr -d '\n' | xclip -selection clipboard
+        echo "Direktori saat ini telah disalin ke clipboard."
+    fi
+}
+
+# langsung buka vscode di directory
+function vs {
+    if [ -n "$1" ]; then
+        z "$1" && code .
+    else
+        echo "Argumen tidak diberikan"
+    fi
+}
+
+# langsung buka explore di directory
+function ee {
+    if [ -n "$1" ]; then
+        z "$1" && caja .
+    else
+        echo "Argumen tidak diberikan"
+    fi
+}
+
+# membuka localhost web ketika ngoding (localhost/$folderName)
+function web {
+    folderName=$(basename $(pwd))
+    url="http://localhost/$folderName/"
+    /usr/bin/google-chrome --new-tab $url
+}
+
+# membuka localhost
+function local {
+    url="http://localhost/phpmyadmin/"
+    /usr/bin/google-chrome --new-tab $url
+}
+
+# membuka github rezapace
+function gr {
+    url="https://github.com/rezapace?tab=repositories"
+    /usr/bin/google-chrome --new-tab $url
+}
+
+# generate new repo
+function gn {
+    url="https://github.com/new"
+    /usr/bin/google-chrome --new-tab $url
+}
 
 
+# menampilkan layar hp
+function hp {
+    cd $HOME/Documents/GitHub
+    ./scrcpy -m720 -b30m
+}
 
 # Shell integrations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -199,3 +259,25 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 function cursor {
     cd "$1" && /opt/cursor.appimage
 }
+
+
+# debuging
+# # Zsh Completion Styles
+# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# zstyle ':completion:*' menu no
+
+# # FZF-tab configurations
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# # Shell integrations
+# echo "Loading fzf.zsh"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# echo "Initializing fzf"
+# eval "$(fzf --zsh)"
+
+# echo "Initializing zoxide"
+# eval "$(zoxide init --cmd cd zsh)"
+
+

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=lsp folder
+Exec=caja /home/r/semester8/LSP
+Icon=folder
+Terminal=true
