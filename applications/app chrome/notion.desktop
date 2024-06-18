@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=notion
+Exec=/usr/bin/google-chrome --new-tab https://www.notion.so/kumal/Task-List-Reza-79d3e3bd36bb4845a0d57a0b71f29e05
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

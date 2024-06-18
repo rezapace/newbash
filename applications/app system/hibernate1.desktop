@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=hibernate
-Exec=sudo pm-hibernate
+Name=old hb
+Exec=systemctl hibernate
 Icon=/path/to/restart-icon.png
 Terminal=false
