@@ -43,3 +43,6 @@ To close all predefined applications:
 - Bash profile: `/home/r/.bash_profile`
 
 For more detailed usage and additional configurations, refer to the `.zshrc` file and individual scripts within the `applications/` directory.
+
+for start function
+chmod +x "/home/r/.local/share/applications/app system/hibernate.desktop"
