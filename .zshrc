@@ -262,6 +262,20 @@ function cursor {
     cd "$1" && /opt/cursor.appimage
 }
 
+# Fungsi untuk mencari folder dan cd ke folder yang dipilih
+cdf() {
+    local dir
+    dir=$(find ${1:-.} -type d 2> /dev/null | fzf --height 40% --layout=reverse --border)
+    if [[ -n "$dir" ]]; then
+        cd "$dir" && zle reset-prompt
+    fi
+}
+zle -N cdf
+
+# Keybinding untuk mencari folder dengan Ctrl + f
+bindkey '^f' cdf
+
+
 
 # debuging
 # # Zsh Completion Styles
