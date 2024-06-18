@@ -95,6 +95,7 @@ alias scursor='cd /opt && sudo -E ./cursor.appimage --no-sandbox'
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
 alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
 alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
+alias pfup='cd /home/r/Documents/Backups && ./copy.sh'
 
 #alias perintah
 alias mx='chmod a+x'
