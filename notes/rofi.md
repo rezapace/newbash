@@ -77,3 +77,80 @@ Terakhir, kita akan menguji konfigurasi Rofi untuk memastikan semuanya berfungsi
    - Jika Anda tidak menemukan jendela yang diinginkan, Anda dapat menekan tombol `Esc` dan Rofi akan menampilkan mode `drun` untuk meluncurkan aplikasi.
 
 Dengan mengikuti langkah-langkah ini, Anda sekarang memiliki Rofi yang dikonfigurasi untuk menampilkan mode window walker terlebih dahulu, diikuti oleh mode aplikasi launcher (drun). Ini memungkinkan Anda untuk dengan mudah beralih antara jendela yang terbuka dan meluncurkan aplikasi baru dari satu antarmuka.
+
+
+# menjalankan terminal command 
+Jika Anda menggunakan Linux Mint, Anda mungkin menggunakan `x-terminal-emulator`, `gnome-terminal`, `xfce4-terminal`, atau terminal lainnya yang sudah terinstal di sistem Anda. Mari kita coba beberapa opsi ini untuk memastikan bahwa kita dapat membuka terminal dengan perintah `sudo`.
+
+1. **Edit Skrip `run_as_admin.sh`:**
+
+   Buka skrip `run_as_admin.sh`:
+
+   ```bash
+   nano /home/r/Documents/Backups/run_as_admin.sh
+   ```
+
+   Ubah konten skrip menjadi seperti ini, mencoba beberapa terminal yang berbeda:
+
+   ```bash
+   #!/bin/bash
+   if [ -z "$1" ]; then
+     echo "Usage: $0 <command>"
+     exit 1
+   fi
+
+   # Uncomment one of the following lines depending on the terminal you have installed
+   # gnome-terminal -- sudo bash -c "$*"
+   # x-terminal-emulator -e "sudo bash -c '$*'"
+   # xfce4-terminal -e "sudo bash -c '$*'"
+   mate-terminal -e "sudo bash -c '$*'"
+   ```
+
+   Simpan dan tutup editor (Ctrl+X, Y, Enter).
+
+   Anda dapat mencoba masing-masing baris terminal yang berbeda dengan mengomentari (menambahkan `#` di depan) baris lainnya.
+
+2. **Uji Skrip:**
+
+   Coba jalankan skrip secara langsung dari terminal untuk memastikan terminal yang Anda pilih berfungsi. Misalnya:
+
+   ```bash
+   /home/r/Documents/Backups/run_as_admin.sh "ls"
+   ```
+
+3. **Perbarui Konfigurasi Rofi:**
+
+   Pastikan konfigurasi Rofi Anda sudah benar dengan menambahkan `combi` ke dalam daftar `modi`. Edit file `~/.config/rofi/config.rasi`:
+
+   ```bash
+   nano ~/.config/rofi/config.rasi
+   ```
+
+   Tambahkan atau modifikasi bagian berikut:
+
+   ```rasi
+   configuration {
+       combi-modi: "window,drun,run";
+       run-command: "/home/r/Documents/Backups/run_as_admin.sh {cmd}";
+   }
+
+   modi: "window,run,drun,combi";
+
+   @theme "/home/r/.local/share/rofi/themes/rounded-gray-dark.rasi"
+   ```
+
+   Simpan dan tutup editor (Ctrl+X, Y, Enter).
+
+4. **Jalankan Rofi:**
+
+   Jalankan Rofi dengan konfigurasi baru Anda:
+
+   ```bash
+   rofi -show combi
+   ```
+
+5. **Penggunaan:**
+
+   Saat Rofi muncul, Anda bisa mengetikkan perintah yang ingin dijalankan dengan hak administrator.
+
+Dengan langkah-langkah ini, Anda sekarang seharusnya dapat menggunakan Rofi untuk menjalankan perintah terminal dengan hak administrator menggunakan skrip `run_as_admin.sh`. Pastikan skrip tersebut memiliki izin eksekusi dan path yang benar dalam konfigurasi Rofi Anda.
