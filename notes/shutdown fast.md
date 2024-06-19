@@ -664,3 +664,205 @@ main() {
 }
 
 main
+
+# finalllllll
+Here's an improved version of your script with enhanced error handling and additional checks for safer execution. I've added more detailed logging and verification steps to ensure the commands execute correctly and only when appropriate:
+
+```bash
+#!/bin/bash
+
+# Script to speed up startup and shutdown on Linux Mint Mate
+
+# Function to display messages
+echo_info() {
+    echo -e "\e[32m[INFO]\e[0m $1"
+}
+
+echo_warn() {
+    echo -e "\e[33m[WARN]\e[0m $1"
+}
+
+echo_error() {
+    echo -e "\e[31m[ERROR]\e[0m $1"
+}
+
+# Function to check the last command status and exit if there was an error
+check_status() {
+    if [ $1 -ne 0 ]; then
+        echo_error "$2"
+        exit 1
+    fi
+}
+
+# Check if the script is run as root
+check_root() {
+    if [ "$EUID" -ne 0 ]; then
+        echo_error "This script must be run as root."
+        exit 1
+    fi
+}
+
+# Disable unnecessary services
+disable_services() {
+    echo_info "Disabling unnecessary services..."
+    local services=(
+        "bluetooth"
+        "cups-browsed"
+        "ModemManager"
+    )
+    for service in "${services[@]}"; do
+        if systemctl list-unit-files | grep -qw "$service.service"; then
+            if systemctl is-active --quiet "$service"; then
+                systemctl disable "$service" && systemctl stop "$service"
+                check_status $? "Failed to disable $service service."
+                echo_info "$service service disabled and stopped."
+            else
+                echo_warn "$service service is already inactive."
+            fi
+        else
+            echo_warn "$service service does not exist."
+        fi
+    done
+}
+
+# Optimize initramfs
+optimize_initramfs() {
+    echo_info "Optimizing initramfs..."
+    if [ -f /etc/initramfs-tools/initramfs.conf ]; then
+        if grep -q '^MODULES=most' /etc/initramfs-tools/initramfs.conf; then
+            sed -i 's/^MODULES=most/MODULES=dep/' /etc/initramfs-tools/initramfs.conf
+            check_status $? "Failed to modify initramfs configuration."
+            update-initramfs -u
+            check_status $? "Failed to update initramfs."
+            echo_info "initramfs optimized."
+        else
+            echo_warn "initramfs is already set to 'dep'."
+        fi
+    else
+        echo_error "initramfs configuration file does not exist."
+    fi
+}
+
+# Reduce grub timeout
+optimize_grub() {
+    echo_info "Reducing grub timeout..."
+    if [ -f /etc/default/grub ]; then
+        if grep -q '^GRUB_TIMEOUT=' /etc/default/grub; then
+            sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/' /etc/default/grub
+            check_status $? "Failed to modify GRUB timeout."
+            update-grub
+            check_status $? "Failed to update grub."
+            echo_info "GRUB timeout reduced."
+        else
+            echo_error "Could not find GRUB_TIMEOUT setting."
+        fi
+    else
+        echo_error "GRUB configuration file does not exist."
+    fi
+}
+
+# Add preload
+add_preload() {
+    echo_info "Adding preload..."
+    if ! dpkg-query -W -f='${Status}' preload 2>/dev/null | grep -q "install ok installed"; then
+        apt-get update
+        check_status $? "Failed to update package list."
+        apt-get install -y preload
+        check_status $? "Failed to install preload."
+        systemctl enable preload && systemctl start preload
+        check_status $? "Failed to enable or start preload."
+        echo_info "Preload installed and enabled."
+    else
+        echo_warn "Preload is already installed."
+    fi
+}
+
+# Set swappiness
+optimize_swappiness() {
+    echo_info "Setting swappiness..."
+    if ! grep -q 'vm.swappiness=10' /etc/sysctl.conf; then
+        echo 'vm.swappiness=10' >> /etc/sysctl.conf
+        check_status $? "Failed to set swappiness."
+        sysctl -p
+        check_status $? "Failed to reload sysctl."
+        echo_info "Swappiness set to 10."
+    else
+        echo_warn "Swappiness is already set to 10."
+    fi
+}
+
+# Clean temporary files
+clean_temp_files() {
+    echo_info "Cleaning temporary files..."
+    rm -rf /tmp/* /var/tmp/*
+    check_status $? "Failed to clean temporary files."
+    echo_info "Temporary files cleaned."
+}
+
+# Reduce systemd shutdown timeout
+optimize_systemd_shutdown() {
+    echo_info "Optimizing systemd shutdown..."
+    if [ -f /etc/systemd/system.conf ]; then
+        if ! grep -q '^DefaultTimeoutStopSec=5s' /etc/systemd/system.conf; then
+            sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=5s/' /etc/systemd/system.conf
+            check_status $? "Failed to set systemd shutdown timeout."
+            systemctl daemon-reload
+            check_status $? "Failed to reload systemd daemon."
+            echo_info "Systemd shutdown timeout set to 5 seconds."
+        else
+            echo_warn "Systemd shutdown timeout is already set to 5 seconds."
+        fi
+    else
+        echo_error "Systemd configuration file does not exist."
+    fi
+}
+
+# Disable hibernate and suspend
+disable_hibernate_suspend() {
+    echo_info "Disabling hibernate and suspend..."
+    systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+    check_status $? "Failed to disable hibernate and suspend."
+    echo_info "Hibernate and suspend disabled."
+}
+
+# Optimize systemd journal
+optimize_journal() {
+    echo_info "Optimizing systemd journal..."
+    if [ -f /etc/systemd/journald.conf ]; then
+        sed -i 's/#Storage=auto/Storage=volatile/' /etc/systemd/journald.conf
+        check_status $? "Failed to configure journald."
+        systemctl restart systemd-journald
+        check_status $? "Failed to restart systemd-journald."
+        echo_info "Systemd journal set to volatile."
+    else
+        echo_error "Systemd journal configuration file does not exist."
+    fi
+}
+
+# Run all functions
+main() {
+    check_root
+    disable_services
+    optimize_initramfs
+    optimize_grub
+    add_preload
+    optimize_swappiness
+    clean_temp_files
+    optimize_systemd_shutdown
+    disable_hibernate_suspend
+    optimize_journal
+
+    echo_info "Optimization complete. Please restart your system to see the changes."
+}
+
+main
+```
+
+**Improvements made:**
+1. **Service Check**: Added a check to verify if a service exists before attempting to disable it.
+2. **File Existence Check**: Added checks to ensure configuration files exist before attempting modifications.
+3. **Package Update**: Added a step to update the package list before installing `preload`.
+4. **Log Messages**: Enhanced log messages for better clarity and troubleshooting.
+5. **Error Handling**: Enhanced error handling to provide more specific messages.
+
+This script now includes more robust checks and error handling to prevent potential issues during execution.
