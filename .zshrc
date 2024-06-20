@@ -78,13 +78,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
-alias rprofile='source ~/.zshrc'
-alias profile='code ~/.zshrc'
 alias closeall='/home/r/Documents/Backups/close_programs.sh'
 alias g='cd /home/r/github'
 alias home='cd /home/r'
-alias lwifi='nmcli device wifi list'
-alias cwifi='/home/r/Documents/Backups/cwifi.sh'
 alias e='caja .'
 alias v='code .'
 alias add='code /home/r/.local/share/applications/'
@@ -95,7 +91,21 @@ alias scursor='cd /opt && sudo -E ./cursor.appimage --no-sandbox'
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
 alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
 alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
+
+#alias peofile
+alias rprofile='source ~/.zshrc'
+alias profile='code ~/.zshrc'
 alias upprofile='cd /home/r/Documents/Backups && ./copy.sh'
+
+#alias wifi new
+alias stwifi='systemctl status NetworkManager'
+alias startwifi='sudo systemctl start NetworkManager'
+alias lwifi='nmcli device wifi list'
+alias lswifi='nmcli device wifi rescan'
+alias cwifi='/home/r/Documents/Backups/cwifi.sh'
+alias rwifi='sudo systemctl restart NetworkManager'
+alias ofwifi='nmcli radio wifi off'
+alias onwifi='nmcli radio wifi on'
 
 #alias perintah
 alias mx='chmod a+x'
@@ -130,19 +140,32 @@ gupp() {
     git push
 }
 
-xampprun() {
-    sudo service httpd start
-    sudo service mariadb start
+# new
+xamppstart() {
+    echo "Starting XAMPP services..."
+    sudo service apache2 start
+    sudo service mysql start
 }
 
+# Fungsi untuk mengecek status XAMPP
 xamppstat() {
-    sudo systemctl status httpd.service
-    sudo systemctl status mariadb.service
+    echo "Checking status of XAMPP services..."
+    sudo service apache2 status
+    sudo service mysql status
 }
 
+# Fungsi untuk menghentikan XAMPP
 xamppstop() {
-    sudo service httpd stop
-    sudo service mariadb stop
+    echo "Stopping XAMPP services..."
+    sudo service apache2 stop
+    sudo service mysql stop
+}
+
+# Fungsi untuk merestart XAMPP
+xampprestart() {
+    echo "Restarting XAMPP services..."
+    sudo service apache2 restart
+    sudo service mysql restart
 }
 
 cpg ()
@@ -196,6 +219,27 @@ cpwd() {
     else
         pwd | tr -d '\n' | xclip -selection clipboard
         echo "Direktori saat ini telah disalin ke clipboard."
+    fi
+}
+# Function to connect to Wi-Fi
+swifi() {
+    local SSID=$1
+    local PASSWORD=$2
+
+    # Check if SSID and PASSWORD are provided
+    if [ -z "$SSID" ] || [ -z "$PASSWORD" ]; then
+        echo "Usage: swifi <SSID> <PASSWORD>"
+        return 1
+    fi
+
+    # Connect to the specified Wi-Fi network
+    nmcli device wifi connect "$SSID" password "$PASSWORD"
+
+    # Check the connection status
+    if [ $? -eq 0 ]; then
+        echo "Connected to $SSID successfully."
+    else
+        echo "Failed to connect to $SSID."
     fi
 }
 
@@ -274,26 +318,3 @@ zle -N cdf
 
 # Keybinding untuk mencari folder dengan Ctrl + f
 bindkey '^f' cdf
-
-
-
-# debuging
-# # Zsh Completion Styles
-# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# zstyle ':completion:*' menu no
-
-# # FZF-tab configurations
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-# # Shell integrations
-# echo "Loading fzf.zsh"
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# echo "Initializing fzf"
-# eval "$(fzf --zsh)"
-
-# echo "Initializing zoxide"
-# eval "$(zoxide init --cmd cd zsh)"
-
-
