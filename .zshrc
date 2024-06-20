@@ -16,13 +16,16 @@ plugins=(
   zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-completions
   zsh-users/zsh-autosuggestions
+  marlonrichert/zsh-autocomplete
+  rupa/z
+  clvv/fasd
+  wting/autojump
+  trapd00r/LS_COLORS
   Aloxaf/fzf-tab
-  agkozak/zsh-z
 )
 
 for plugin in "${plugins[@]}"; do
-  zinit ice depth=1
-  zinit light "$plugin"
+  zinit load "$plugin"
 done
 
 # Load snippets
@@ -57,9 +60,27 @@ setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_sa
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':completion:*' menu select=2
+
+# Fzf-tab configuration for Tab completion
+zstyle ':fzf-tab:*' switch-group ','  # Use comma to switch groups in fzf-tab
+zstyle ':fzf-tab:*' query-string ' '  # Start searching after pressing space
+zstyle ':fzf-tab:*' fzf-preview 'bat --style=numbers --color=always --line-range :500 {}'  # Use bat for preview
+zstyle ':fzf-tab:*' descriptions 'yes'
+zstyle ':fzf-tab:*' disable-color 'no'
+zstyle ':fzf-tab:*' complete-in 'yes'
+zstyle ':fzf-tab:*' layout 'reverse'
+
+# Optional: Fzf keybindings for interactive search
+if [[ -n "$fzf_bindings" ]]; then
+  source "$fzf_bindings"
+fi
+
+# Load LS_COLORS configuration
+if [[ -f ~/.dircolors ]]; then
+  eval "$(dircolors -b ~/.dircolors)"
+fi
+
 
 # Directory navigation aliases
 alias www='cd /var/www/html'
