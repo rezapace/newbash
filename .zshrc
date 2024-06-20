@@ -1,52 +1,46 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Initialize Powerlevel10k instant prompt if cache file is readable
+[[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
-if [[ -f "/opt/homebrew/bin/brew" ]]; then
-  # If you're using macOS, you'll want this enabled
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Set the directory we want to store zinit and plugins
+# Set Zinit directory
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
+# Download Zinit if not present
+[[ ! -d "$ZINIT_HOME" ]] && { mkdir -p "$(dirname "$ZINIT_HOME")"; git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"; }
 
-# Source/Load zinit
+# Source Zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Load plugins and themes with Zinit
+zinit ice wait lucid
+zinit light romkatv/powerlevel10k
 
-# Add in zsh plugins
+zinit ice wait lucid
 zinit light zsh-users/zsh-syntax-highlighting
+
+zinit ice wait lucid
 zinit light zsh-users/zsh-completions
+
+zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
+
+zinit ice wait lucid
 zinit light Aloxaf/fzf-tab
 
-# Add in zsh-z plugin
+zinit ice wait lucid
 zinit light agkozak/zsh-z
 
-# Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
+# Load snippets
+for snippet in git sudo archlinux aws kubectl kubectx command-not-found; do
+  zinit ice wait lucid
+  zinit snippet OMZP::$snippet
+done
 
 # Load completions
 autoload -Uz compinit && compinit
-
 zinit cdreplay -q
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Load Powerlevel10k configuration if it exists
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # Keybindings
 bindkey -e
@@ -54,18 +48,12 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
-# History
+# History configuration
 HISTSIZE=500000000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -74,40 +62,20 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
-alias closeall='/home/r/Documents/Backups/close_programs.sh'
-alias g='cd /home/r/github'
-alias home='cd /home/r'
-alias e='caja .'
-alias v='code .'
-alias add='code /home/r/.local/share/applications/'
-alias hapus='rm -rf'
-alias mod='chmod +x ./'
-alias scode='sudo code --no-sandbox --user-data-dir'
-alias scursor='cd /opt && sudo -E ./cursor.appimage --no-sandbox'
-alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
-alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
-alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
+# Directory navigation aliases
+alias www='cd /var/www/html'
+alias g='cd ~/github'
+alias home='cd ~'
+alias h='cd ~'
+alias htdoc='cd /var/www/html'
 
-#alias peofile
-alias rprofile='source ~/.zshrc'
-alias profile='code ~/.zshrc'
-alias upprofile='cd /home/r/Documents/Backups && ./copy.sh'
+# Directory listing and management aliases
+alias ls='exa --color=auto --group-directories-first'
+alias ll='exa -alF --color=always --group-directories-first --icons'
+alias tree='exa --tree --level=2 --color=always --group-directories-first --icons'
 
-#alias wifi new
-alias stwifi='systemctl status NetworkManager'
-alias startwifi='sudo systemctl start NetworkManager'
-alias lwifi='nmcli device wifi list'
-alias lswifi='nmcli device wifi rescan'
-alias cwifi='/home/r/Documents/Backups/cwifi.sh'
-alias rwifi='sudo systemctl restart NetworkManager'
-alias ofwifi='nmcli radio wifi off'
-alias onwifi='nmcli radio wifi on'
-
-#alias perintah
+# File and directory permissions aliases
+alias mod='chmod +x ./*'
 alias mx='chmod a+x'
 alias 000='chmod -R 000'
 alias 644='chmod -R 644'
@@ -115,206 +83,139 @@ alias 666='chmod -R 666'
 alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
-# docker
+# Network management aliases
+alias stwifi='systemctl status NetworkManager'
+alias startwifi='sudo systemctl start NetworkManager'
+alias lwifi='nmcli device wifi list'
+alias lswifi='nmcli device wifi rescan'
+alias cwifi='~/Documents/Backups/cwifi.sh'
+alias rwifi='sudo systemctl restart NetworkManager'
+alias ofwifi='nmcli radio wifi off'
+alias onwifi='nmcli radio wifi on'
+
+# Docker and Podman management aliases
 alias dstop='sudo systemctl stop docker.socket && sudo systemctl stop docker'
 alias pstop='sudo systemctl stop podman && sudo systemctl stop podman.socket'
-alias dstart='sudo systemctl start docker.socket && sudo systemctl start docker'
-alias pstart='sudo systemctl start podman && sudo systemctl start podman.socket'
+alias dstart='sudo systemctl start docker.socket && sudo systemctl start docker && log "Docker started" || log "Failed to start Docker"'
+alias pstart='sudo systemctl start podman && sudo systemctl start podman.socket && log "Podman started" || log "Failed to start Podman"'
 alias dstat='sudo systemctl status docker'
-alias pstat='sudo systemctl status socket'
+alias pstat='sudo systemctl status podman'
 
-# xampp
+# Text editors and IDE aliases
+alias vim='nvim'
+alias v='code .'
+alias add='code ~/.local/share/applications/'
+alias profile='code ~/.zshrc'
+alias scode='sudo code --no-sandbox --user-data-dir'
+
+# Miscellaneous aliases
+alias c='clear'
+alias e='caja .'
 alias ehtdoc='caja /var/www/html'
-alias htdoc='cd /var/www/html'
-alias www='cd /var/www/html'
+alias rprofile='source ~/.zshrc'
+alias hapus='rm -rf'
+alias scursor='cd /opt && sudo -E ./cursor.appimage --no-sandbox'
+alias helpme='/home/r/Documents/Backups/helpme.sh'
+alias upprofile='cd /home/r/Documents/Backups && ./copy.sh'
+alias closeall='/home/r/Documents/Backups/close_programs.sh'
 
 # Functions
 mkdirg() {
-    mkdir -p "$1"
-    cd "$1"
+  [[ -n "$1" ]] && mkdir -p "$1" && cd "$1" || { echo "Usage: mkdirg <directory_name>"; return 1; }
 }
 
 gupp() {
-    git add .
-    git commit -m "$1"
-    git push
+  [[ -n "$1" ]] && git add . && git commit -m "$1" && git push || { echo "Usage: gupp <commit_message>"; return 1; }
 }
 
-# new
-xamppstart() {
-    echo "Starting XAMPP services..."
-    sudo service apache2 start
-    sudo service mysql start
+xampp_control() {
+  local action=$1
+  local services=("apache2" "mysql")
+  local action_capitalized=$(echo "${action:0:1}" | tr 'a-z' 'A-Z')${action:1}
+  [[ -z "$action" ]] && { echo "Usage: xampp_control <start|stop|restart|status>"; return 1; }
+  echo "${action_capitalized}ing XAMPP services..."
+  for service in "${services[@]}"; do
+    sudo service "$service" "$action" && log "XAMPP service $service ${action}ed" || log "Failed to ${action} XAMPP service $service"
+  done
 }
 
-# Fungsi untuk mengecek status XAMPP
-xamppstat() {
-    echo "Checking status of XAMPP services..."
-    sudo service apache2 status
-    sudo service mysql status
+cpg() {
+  local src=$1 dest=$2
+  [[ -z "$src" || -z "$dest" ]] && { echo "Usage: cpg <source_file> <destination_directory>"; return 1; }
+  local new_dest="$dest/$(basename "$src")"
+  [[ -e "$new_dest" ]] && new_dest="${new_dest%.*}_$(date +"%Y%m%d%H%M%S").${new_dest##*.}"
+  cp "$src" "$new_dest" && cd "$dest"
 }
 
-# Fungsi untuk menghentikan XAMPP
-xamppstop() {
-    echo "Stopping XAMPP services..."
-    sudo service apache2 stop
-    sudo service mysql stop
-}
-
-# Fungsi untuk merestart XAMPP
-xampprestart() {
-    echo "Restarting XAMPP services..."
-    sudo service apache2 restart
-    sudo service mysql restart
-}
-
-cpg ()
-{
-    if [ -d "$2" ]; then
-        dest="$2/$(basename "$1")"
-        if [ -e "$dest" ]; then
-            timestamp=$(date +"%Y%m%d%H%M%S")
-            base="${dest%.*}"
-            ext="${dest##*.}"
-            if [ "$base" = "$ext" ]; then
-                new_dest="${dest}_${timestamp}"
-            else
-                new_dest="${base}_${timestamp}.${ext}"
-            fi
-            cp "$1" "$new_dest"
-        else
-            cp "$1" "$dest"
-        fi
-        cd "$2"
-    else
-        cp "$1" "$2"
-    fi
-}
-
-mvg ()
-{
-    if [ -d "$2" ]; then
-        dest="$2/$(basename "$1")"
-        if [ -e "$dest" ]; then
-            timestamp=$(date +"%Y%m%d%H%M%S")
-            base="${dest%.*}"
-            ext="${dest##*.}"
-            if [ "$base" = "$ext" ]; then
-                new_dest="${dest}_${timestamp}"
-            else
-                new_dest="${base}_${timestamp}.${ext}"
-            fi
-            mv "$1" "$new_dest" && cd "$2"
-        else
-            mv "$1" "$dest" && cd "$2"
-        fi
-    else
-        mv "$1" "$2"
-    fi
+mvg() {
+  local src=$1 dest=$2
+  [[ -z "$src" || -z "$dest" ]] && { echo "Usage: mvg <source_file> <destination_directory>"; return 1; }
+  local new_dest="$dest/$(basename "$src")"
+  [[ -e "$new_dest" ]] && new_dest="${new_dest%.*}_$(date +"%Y%m%d%H%M%S").${new_dest##*.}"
+  mv "$src" "$new_dest" && cd "$dest"
 }
 
 cpwd() {
-    if [ -n "$1" ]; then
-        cp -r "$(pwd)" "$1"
-    else
-        pwd | tr -d '\n' | xclip -selection clipboard
-        echo "Direktori saat ini telah disalin ke clipboard."
-    fi
+  local dest=$1
+  [[ -n "$dest" ]] && cp -r "$(pwd)" "$dest" || { pwd | tr -d '\n' | xclip -selection clipboard; echo "Current directory copied to clipboard."; }
 }
-# Function to connect to Wi-Fi
+
 swifi() {
-    local SSID=$1
-    local PASSWORD=$2
-
-    # Check if SSID and PASSWORD are provided
-    if [ -z "$SSID" ] || [ -z "$PASSWORD" ]; then
-        echo "Usage: swifi <SSID> <PASSWORD>"
-        return 1
-    fi
-
-    # Connect to the specified Wi-Fi network
-    nmcli device wifi connect "$SSID" password "$PASSWORD"
-
-    # Check the connection status
-    if [ $? -eq 0 ]; then
-        echo "Connected to $SSID successfully."
-    else
-        echo "Failed to connect to $SSID."
-    fi
+  local SSID=$1 PASSWORD=$2
+  [[ -z "$SSID" || -z "$PASSWORD" ]] && { echo "Usage: swifi <SSID> <PASSWORD>"; return 1; }
+  nmcli device wifi connect "$SSID" password "$PASSWORD" && echo "Connected to $SSID successfully." || echo "Failed to connect to $SSID."
 }
 
-# langsung buka vscode di directory
-function vs {
-    if [ -n "$1" ]; then
-        z "$1" && code .
-    else
-        echo "Argumen tidak diberikan"
-    fi
+vs() {
+  [[ -n "$1" ]] && z "$1" && code . || { echo "Usage: vs <directory>"; return 1; }
 }
 
-# langsung buka explore di directory
-function ee {
-    if [ -n "$1" ]; then
-        z "$1" && caja .
-    else
-        echo "Argumen tidak diberikan"
-    fi
+ee() {
+  [[ -n "$1" ]] && z "$1" && caja . || { echo "Usage: ee <directory>"; return 1; }
 }
 
-# membuka localhost web ketika ngoding (localhost/$folderName)
-function web {
-    folderName=$(basename $(pwd))
-    url="http://localhost/$folderName/"
-    /usr/bin/google-chrome --new-tab $url
+web() {
+  local folderName=$(basename "$(pwd)")
+  /usr/bin/google-chrome --new-tab "http://localhost/$folderName/"
 }
 
-# membuka localhost
-function local {
-    url="http://localhost/phpmyadmin/"
-    /usr/bin/google-chrome --new-tab $url
+local() {
+  /usr/bin/google-chrome --new-tab "http://localhost/phpmyadmin/"
 }
 
-# membuka github rezapace
-function gr {
-    url="https://github.com/rezapace?tab=repositories"
-    /usr/bin/google-chrome --new-tab $url
+grr() {
+  /usr/bin.google-chrome --new-tab "https://github.com/rezapace?tab=repositories"
 }
 
-# generate new repo
-function gn {
-    url="https://github.com/new"
-    /usr/bin/google-chrome --new-tab $url
+gn() {
+  /usr/bin.google-chrome --new-tab "https://github.com/new"
 }
 
-
-# menampilkan layar hp
-function hp {
-    cd $HOME/Documents/GitHub
-    ./scrcpy -m720 -b30m
+hp() {
+  cd "$HOME/Documents/GitHub" && ./scrcpy -m720 -b30m
 }
 
-# Shell integrations
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+cursor() {
+  [[ -n "$1" ]] && cd "$1" && /opt/cursor.appimage || { echo "Usage: cursor <directory>"; return 1; }
+}
+
+cdf() {
+  local dir=$(find ${1:-.} -type d 2> /dev/null | fzf --height 40% --layout=reverse --border)
+  [[ -n "$dir" ]] && cd "$dir" && zle reset-prompt || { echo "No directory selected."; return 1; }
+}
+zle -N cdf
+bindkey '^f' cdf
+
+# Logging function
+log() {
+  echo "$(date +'%Y-%m-%d %H:%M:%S') - $1" >> ~/.zsh_log
+}
+
+# Load fzf
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 eval "$(fzf --zsh)"
-# eval "$(zoxide init --cmd cd zsh)"
 
+# Environment variables
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-function cursor {
-    cd "$1" && /opt/cursor.appimage
-}
-
-# Fungsi untuk mencari folder dan cd ke folder yang dipilih
-cdf() {
-    local dir
-    dir=$(find ${1:-.} -type d 2> /dev/null | fzf --height 40% --layout=reverse --border)
-    if [[ -n "$dir" ]]; then
-        cd "$dir" && zle reset-prompt
-    fi
-}
-zle -N cdf
-
-# Keybinding untuk mencari folder dengan Ctrl + f
-bindkey '^f' cdf
