@@ -1,4 +1,4 @@
-# Initialize Powerlevel10k instant prompt if cache file is readable
+# Initialize p10k instant prompt if cache file is readable
 [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
 # Set Zinit directory
@@ -11,27 +11,26 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Load plugins and themes with Zinit
-zinit ice wait lucid
-zinit light romkatv/powerlevel10k
+plugins=(
+  romkatv/powerlevel10k
+  zsh-users/zsh-syntax-highlighting
+  zsh-users/zsh-completions
+  zsh-users/zsh-autosuggestions
+  Aloxaf/fzf-tab
+  agkozak/zsh-z
+)
 
-zinit ice wait lucid
-zinit light zsh-users/zsh-syntax-highlighting
-
-zinit ice wait lucid
-zinit light zsh-users/zsh-completions
-
-zinit ice wait lucid
-zinit light zsh-users/zsh-autosuggestions
-
-zinit ice wait lucid
-zinit light Aloxaf/fzf-tab
-
-zinit ice wait lucid
-zinit light agkozak/zsh-z
+for plugin in "${plugins[@]}"; do
+  zinit ice depth=1
+  zinit light "$plugin"
+done
 
 # Load snippets
-for snippet in git sudo archlinux aws kubectl kubectx command-not-found; do
-  zinit ice wait lucid
+snippets=(
+  git sudo archlinux aws kubectl kubectx command-not-found
+)
+
+for snippet in "${snippets[@]}"; do
   zinit snippet OMZP::$snippet
 done
 
