@@ -1,3 +1,5 @@
+# vscode rofi chrome
+
 Agar aplikasi dapat terbuka lebih cepat di Linux Mint MATE, Anda bisa mencoba beberapa langkah berikut:
 
 1. **Periksa Spesifikasi Hardware**: Pastikan perangkat keras Anda memenuhi kebutuhan minimal untuk menjalankan Linux Mint dengan lancar. Jika perlu, tambahkan RAM atau ganti ke SSD untuk peningkatan performa.
