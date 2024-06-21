@@ -231,6 +231,13 @@ cdf() {
 zle -N cdf
 bindkey '^f' cdf
 
+cdq() {
+  cd /home/r && local dir=$(find "${1:-.}" -type d 2>/dev/null | fzf --height 40% --layout=reverse --border)
+  [[ -n "$dir" ]] && cd "$dir" && zle reset-prompt || echo "No directory selected." && return 1
+}
+zle -N cdq
+bindkey '^b' cdq
+
 # Logging function
 log() {
   echo "$(date +'%Y-%m-%d %H:%M:%S') - $1" >> ~/.zsh_log
@@ -238,23 +245,43 @@ log() {
 
 # zip unzip
 extract() {
-    if [[ $# -eq 0 ]]; then
-        print_error "No file specified."
-        return 1
-    fi
-    for file in "$@"; do
-        if [[ -f $file ]]; then
-            case $file in
-                *.tar.gz) tar -xzf "$file" && print_success "Extracted $file" ;;
-                *.zip) unzip "$file" && print_success "Extracted $file" ;;
-                *.rar) unrar x "$file" && print_success "Extracted $file" ;;
-                *) print_error "Unsupported file format: $file" ;;
-            esac
-        else
-            print_error "File not found: $file"
-        fi
+    [[ $# -eq 0 ]] && { print_error "No file specified."; return 1; }
+    for file; do
+        [[ -f $file ]] || { print_error "File not found: $file"; continue; }
+        case $file in
+            *.tar.gz) tar -xzf "$file" && print_success "Extracted $file" || print_error "Failed to extract $file" ;;
+            *.zip) unzip "$file" && print_success "Extracted $file" || print_error "Failed to extract $file" ;;
+            *.rar) unrar x "$file" && print_success "Extracted $file" || print_error "Failed to extract $file" ;;
+            *) print_error "Unsupported file format: $file" ;;
+        esac
     done
 }
+
+# Searches for text in all files in the current folder
+ftext() {
+# grep: Utilitas baris perintah yang digunakan untuk mencari teks dalam file.
+# -i: Melakukan pencarian tanpa mempedulikan huruf besar atau kecil (case-insensitive).
+# -I: Mengabaikan file biner.
+# -H: Menampilkan nama file yang cocok.
+# -r: Melakukan pencarian secara rekursif dalam direktori dan subdirektori.
+# -n: Menampilkan nomor baris dari hasil pencarian.
+# --color=always: Menyorot teks yang cocok dengan warna.
+# "$1": Teks atau pola yang dicari.
+# .: Menentukan direktori saat ini sebagai tempat untuk memulai pencarian.
+# | less -r: Mengalirkan output grep ke less untuk penelusuran yang lebih mudah, dengan -r menjaga urutan warna.
+	grep -iIHrn --color=always "$1" . | less -r
+}
+
+up() {
+    if [[ -z $1 || ! $1 =~ '^[0-9]+$' ]]; then
+        print_error "Usage: up number_of_directories."
+        return 1
+    fi
+    for ((i = 0; i < $1; i++)); do
+        cd ..
+    done
+}
+
 
 # Load fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
