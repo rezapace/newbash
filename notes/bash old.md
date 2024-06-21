@@ -665,3 +665,324 @@ Berikut adalah fungsi-fungsi yang ada di dalam script bashrc yang kamu berikan, 
     - **Cara Menggunakan**: `hb path/to/file`
 
 Setiap fungsi memiliki tujuan spesifik dan cara penggunaan yang telah dijelaskan di atas. Kamu dapat menambahkan atau mengubah sesuai kebutuhan kamu dengan mengedit script .bashrc tersebut.
+
+
+# script for zsh
+#!/bin/zsh
+
+# Warna untuk output
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+print_error() {
+    echo -e "${RED}Error:${NC} $1"
+}
+
+extract() {
+    if [[ $# -eq 0 ]]; then
+        print_error "No file specified."
+        return 1
+    fi
+    for file in "$@"; do
+        if [[ -f $file ]]; then
+            case $file in
+                *.tar.gz) tar -xzf "$file" ;;
+                *.zip) unzip "$file" ;;
+                *.rar) unrar x "$file" ;;
+                *) print_error "Unsupported file format: $file" ;;
+            esac
+        else
+            print_error "File not found: $file"
+        fi
+    done
+}
+
+ftext() {
+    if [[ -z $1 ]]; then
+        print_error "No text specified."
+        return 1
+    fi
+    grep -r "$1" . || print_error "Text not found."
+}
+
+cpp() {
+    if [[ $# -ne 2 ]]; then
+        print_error "Usage: cpp source destination."
+        return 1
+    fi
+    rsync --progress "$1" "$2"
+}
+
+cpg() {
+    if [[ $# -ne 2 ]]; then
+        print_error "Usage: cpg file /destination_directory."
+        return 1
+    fi
+    cp "$1" "$2" && cd "$2"
+}
+
+mvg() {
+    if [[ $# -ne 2 ]]; then
+        print_error "Usage: mvg file /destination_directory."
+        return 1
+    fi
+    mv "$1" "$2" && cd "$2"
+}
+
+mkdirg() {
+    if [[ -z $1 ]]; then
+        print_error "No directory name specified."
+        return 1
+    fi
+    mkdir -p "$1" && cd "$1"
+}
+
+up() {
+    if [[ -z $1 || ! $1 =~ '^[0-9]+$' ]]; then
+        print_error "Usage: up number_of_directories."
+        return 1
+    fi
+    for ((i = 0; i < $1; i++)); do
+        cd ..
+    done
+}
+
+pwdtail() {
+    echo "${PWD##*/}/${PWD##*/}"
+}
+
+distribution() {
+    lsb_release -a 2>/dev/null || cat /etc/*release 2>/dev/null
+}
+
+ver() {
+    uname -a
+}
+
+install_bashrc_support() {
+    echo -e "${GREEN}Installing necessary packages...${NC}"
+    sudo apt-get update
+    sudo apt-get install -y unzip unrar rsync
+}
+
+whatsmyip() {
+    echo -e "${YELLOW}Internal IP:${NC} $(hostname -I | awk '{print $1}')"
+    echo -e "${YELLOW}External IP:${NC} $(curl -s ifconfig.me)"
+}
+
+apachelog() {
+    tail -f /var/log/apache2/access.log
+}
+
+apacheconfig() {
+    sudo nano /etc/apache2/apache2.conf
+}
+
+phpconfig() {
+    sudo nano /etc/php/7.4/apache2/php.ini
+}
+
+mysqlconfig() {
+    sudo nano /etc/mysql/my.cnf
+}
+
+trim() {
+    if [[ -z $1 ]]; then
+        print_error "No text specified."
+        return 1
+    fi
+    echo "$1" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+}
+
+gcom() {
+    if [[ -z $1 ]]; then
+        print_error "No commit message specified."
+        return 1
+    fi
+    git add . && git commit -m "$1"
+}
+
+lazyg() {
+    if [[ -z $1 ]]; then
+        print_error "No commit message specified."
+        return 1
+    fi
+    git add . && git commit -m "$1" && git push
+}
+
+hb() {
+    if [[ -z $1 ]]; then
+        print_error "No file path specified."
+        return 1
+    fi
+    cat "$1" | hastebin
+}
+
+
+# penggunaan 
+Berikut adalah deskripsi dan cara penggunaan untuk setiap fungsi dalam skrip Zsh:
+
+### `extract`
+**Deskripsi**: Mengekstrak berbagai jenis arsip (zip, tar.gz, rar, dll).
+
+**Cara Menggunakan**: 
+```sh
+extract file1.tar.gz file2.zip
+```
+
+### `ftext`
+**Deskripsi**: Mencari teks dalam semua file di folder saat ini.
+
+**Cara Menggunakan**: 
+```sh
+ftext "cari_teks"
+```
+
+### `cpp`
+**Deskripsi**: Menyalin file dengan progress bar.
+
+**Cara Menggunakan**: 
+```sh
+cpp sumber tujuan
+```
+
+### `cpg`
+**Deskripsi**: Menyalin file dan berpindah ke direktori tujuan.
+
+**Cara Menggunakan**: 
+```sh
+cpg file /direktori_tujuan
+```
+
+### `mvg`
+**Deskripsi**: Memindahkan file dan berpindah ke direktori tujuan.
+
+**Cara Menggunakan**: 
+```sh
+mvg file /direktori_tujuan
+```
+
+### `mkdirg`
+**Deskripsi**: Membuat dan berpindah ke direktori baru.
+
+**Cara Menggunakan**: 
+```sh
+mkdirg direktori_baru
+```
+
+### `up`
+**Deskripsi**: Berpindah ke sejumlah direktori di atas direktori saat ini.
+
+**Cara Menggunakan**: 
+```sh
+up 3
+```
+(untuk berpindah ke 3 direktori di atas)
+
+### `pwdtail`
+**Deskripsi**: Menampilkan dua bagian terakhir dari path direktori saat ini.
+
+**Cara Menggunakan**: 
+```sh
+pwdtail
+```
+
+### `distribution`
+**Deskripsi**: Menampilkan distribusi Linux saat ini.
+
+**Cara Menggunakan**: 
+```sh
+distribution
+```
+
+### `ver`
+**Deskripsi**: Menampilkan versi dari sistem operasi.
+
+**Cara Menggunakan**: 
+```sh
+ver
+```
+
+### `install_bashrc_support`
+**Deskripsi**: Menginstal paket-paket yang diperlukan untuk mendukung script .bashrc ini.
+
+**Cara Menggunakan**: 
+```sh
+install_bashrc_support
+```
+
+### `whatsmyip`
+**Deskripsi**: Menampilkan IP internal dan eksternal.
+
+**Cara Menggunakan**: 
+```sh
+whatsmyip
+```
+
+### `apachelog`
+**Deskripsi**: Menampilkan log Apache.
+
+**Cara Menggunakan**: 
+```sh
+apachelog
+```
+
+### `apacheconfig`
+**Deskripsi**: Mengedit konfigurasi Apache.
+
+**Cara Menggunakan**: 
+```sh
+apacheconfig
+```
+
+### `phpconfig`
+**Deskripsi**: Mengedit konfigurasi PHP.
+
+**Cara Menggunakan**: 
+```sh
+phpconfig
+```
+
+### `mysqlconfig`
+**Deskripsi**: Mengedit konfigurasi MySQL.
+
+**Cara Menggunakan**: 
+```sh
+mysqlconfig
+```
+
+### `trim`
+**Deskripsi**: Menghilangkan spasi di awal dan akhir string.
+
+**Cara Menggunakan**: 
+```sh
+trim " teks dengan spasi "
+```
+
+### `gcom`
+**Deskripsi**: Menambah dan meng-commit semua perubahan dengan pesan commit yang diberikan.
+
+**Cara Menggunakan**: 
+```sh
+gcom "pesan commit"
+```
+
+### `lazyg`
+**Deskripsi**: Menambah, meng-commit, dan mendorong semua perubahan dengan pesan commit yang diberikan.
+
+**Cara Menggunakan**: 
+```sh
+lazyg "pesan commit"
+```
+
+### `hb`
+**Deskripsi**: Mengunggah file teks ke hastebin dan mengembalikan URL.
+
+**Cara Menggunakan**: 
+```sh
+hb path/to/file
+```
+
+Dengan menggunakan deskripsi dan cara penggunaan ini, Anda dapat dengan mudah memahami dan menggunakan setiap fungsi dalam skrip Zsh yang telah disediakan.
