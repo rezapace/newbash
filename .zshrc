@@ -138,6 +138,7 @@ alias helpme='/home/r/Documents/Backups/helpme.sh'
 alias upprofile='cd /home/r/Documents/Backups && ./copy.sh'
 alias closeall='/home/r/Documents/Backups/close_programs.sh'
 alias fzip='/home/r/Documents/Backups/fzip.sh'
+alias gnew='/home/r/Documents/Backups/gnew.sh'
 
 # Functions
 mkdirg() {
