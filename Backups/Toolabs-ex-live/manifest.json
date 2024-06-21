@@ -1,0 +1,32 @@
+{
+   "background": {
+      "service_worker": "files/bg.js"
+   },
+   "action": {
+      "default_icon": "icons/icon120.png",
+      "default_popup": "files/popup.html",
+      "default_title": "toolabs"
+   },
+   "content_scripts": [ {
+      "js": [ "files/lib/js/jquery-3.6.0.min.js", "files/app.js" ],
+      "matches": ["<all_urls>"],
+      "all_frames": true,
+      "match_origin_as_fallback": true,
+      "run_at": "document_end"
+   } ],
+   "description": "Official extensions by toolabs.live",
+   "icons": {
+      "48": "icons/icon48.png",
+      "120": "icons/icon120.png"
+   },
+   "manifest_version": 3,
+   "name": "Toolabs Live",
+   "offline_enabled": true,
+   "permissions": [ "activeTab", "cookies", "proxy", "storage", "contextMenus", "management", "tabs", "webRequest", "webNavigation", "declarativeContent" ],
+   "host_permissions": [
+      "*://*/*"
+   ],
+   "short_name": "toolabs",
+   "version": "3.0.2",
+   "homepage_url": "https://www.toolabs.live"
+}

@@ -1,0 +1,19 @@
+body{
+  min-width:600px;
+  max-width:650px;
+  font-family: 'Open Sans', sans-serif;
+  background:#ffffff;
+  margin: 0 auto 0 auto;  
+  width:100%; 
+  text-align:center;
+  margin: 0;   
+}
+.bg-primary{
+  background-color: #1b243a !important;
+}
+.bg-dark{
+  background-color: #141b2b !important;
+}
+.card{
+  border:unset !important;
+}
