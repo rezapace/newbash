@@ -137,6 +137,7 @@ alias scursor='cd /opt && sudo -E ./cursor.appimage --no-sandbox'
 alias helpme='/home/r/Documents/Backups/helpme.sh'
 alias upprofile='cd /home/r/Documents/Backups && ./copy.sh'
 alias closeall='/home/r/Documents/Backups/close_programs.sh'
+alias fzip='/home/r/Documents/Backups/fzip.sh'
 
 # Functions
 mkdirg() {
@@ -233,6 +234,26 @@ bindkey '^f' cdf
 # Logging function
 log() {
   echo "$(date +'%Y-%m-%d %H:%M:%S') - $1" >> ~/.zsh_log
+}
+
+# zip unzip
+extract() {
+    if [[ $# -eq 0 ]]; then
+        print_error "No file specified."
+        return 1
+    fi
+    for file in "$@"; do
+        if [[ -f $file ]]; then
+            case $file in
+                *.tar.gz) tar -xzf "$file" && print_success "Extracted $file" ;;
+                *.zip) unzip "$file" && print_success "Extracted $file" ;;
+                *.rar) unrar x "$file" && print_success "Extracted $file" ;;
+                *) print_error "Unsupported file format: $file" ;;
+            esac
+        else
+            print_error "File not found: $file"
+        fi
+    done
 }
 
 # Load fzf
