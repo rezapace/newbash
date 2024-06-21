@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Obsidian
+Comment=A powerful note-taking app
+Exec=bash -c "cd /opt && ./Obsidian-1.6.3.AppImage --no-sandbox"
+Icon=/path/to/obsidian/icon.png  # Ganti dengan path ikon Obsidian jika ada
+Terminal=false
+Type=Application
+Categories=Utility;
