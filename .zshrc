@@ -81,7 +81,6 @@ if [[ -f ~/.dircolors ]]; then
   eval "$(dircolors -b ~/.dircolors)"
 fi
 
-
 # Directory navigation aliases
 alias www='cd /var/www/html'
 alias g='cd ~/github'
