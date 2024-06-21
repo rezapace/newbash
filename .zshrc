@@ -195,20 +195,25 @@ ee() {
 
 web() {
   local folderName=$(basename "$(pwd)")
-  /usr/bin/google-chrome --new-tab "http://localhost/$folderName/"
+  local url="http://localhost/$folderName/"
+  /usr/bin/google-chrome --new-tab "$url"
 }
 
-local() {
-  /usr/bin/google-chrome --new-tab "http://localhost/phpmyadmin/"
+localhost() {
+  local url="http://localhost/phpmyadmin/"
+  /usr/bin/google-chrome --new-tab "$url"
 }
 
 grr() {
-  /usr/bin.google-chrome --new-tab "https://github.com/rezapace?tab=repositories"
+  local url="https://github.com/rezapace?tab=repositories"
+  /usr/bin/google-chrome --new-tab "$url"
 }
 
 gn() {
-  /usr/bin.google-chrome --new-tab "https://github.com/new"
+  local url="https://github.com/new"
+  /usr/bin/google-chrome --new-tab "$url"
 }
+
 
 hp() {
   cd "$HOME/Documents/GitHub" && ./scrcpy -m720 -b30m
