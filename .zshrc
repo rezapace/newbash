@@ -140,6 +140,12 @@ alias closeall='/home/r/Documents/Backups/close_programs.sh'
 alias fzip='/home/r/Documents/Backups/fzip.sh'
 alias gnew='/home/r/Documents/Backups/gnew.sh'
 
+#myscript
+alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
+alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
+alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
+
+
 # Functions
 mkdirg() {
   [[ -n "$1" ]] && mkdir -p "$1" && cd "$1" || { echo "Usage: mkdirg <directory_name>"; return 1; }
