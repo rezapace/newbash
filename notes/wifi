@@ -1,0 +1,74 @@
+Untuk memeriksa informasi tentang jaringan Wi-Fi yang terhubung saat ini di Linux Mint Mate menggunakan terminal, Anda dapat menggunakan beberapa perintah berikut:
+
+1. **Menggunakan `nmcli` (NetworkManager Command Line Interface):**
+
+   NetworkManager adalah alat yang banyak digunakan untuk mengelola koneksi jaringan di banyak distribusi Linux, termasuk Linux Mint.
+
+   ```bash
+   nmcli connection show --active
+   ```
+
+   Perintah ini akan menampilkan daftar koneksi jaringan yang sedang aktif. Cari koneksi dengan `type: wifi` untuk melihat detail Wi-Fi yang terhubung.
+
+2. **Menggunakan `iwconfig`:**
+
+   Perintah ini menunjukkan status nirkabel dari antarmuka jaringan nirkabel Anda.
+
+   ```bash
+   iwconfig
+   ```
+
+   Output dari perintah ini akan mencakup informasi seperti SSID (nama jaringan) dan kualitas sinyal.
+
+3. **Menggunakan `iwgetid`:**
+
+   Perintah ini memberikan informasi tentang identitas dari antarmuka nirkabel, seperti SSID dari jaringan Wi-Fi yang terhubung.
+
+   ```bash
+   iwgetid
+   ```
+
+   Untuk menampilkan hanya SSID:
+
+   ```bash
+   iwgetid -r
+   ```
+
+4. **Menggunakan `ifconfig` atau `ip a`:**
+
+   Meskipun `ifconfig` mulai digantikan oleh `ip` dalam distribusi modern, Anda masih bisa menggunakannya untuk melihat informasi tentang antarmuka jaringan Anda.
+
+   ```bash
+   ifconfig
+   ```
+
+   atau
+
+   ```bash
+   ip a
+   ```
+
+   Cari antarmuka nirkabel Anda (biasanya bernama `wlan0` atau `wlp2s0`), dan periksa apakah ada alamat IP yang ditetapkan untuk memastikan bahwa antarmuka tersebut terhubung.
+
+### Contoh Penggunaan
+
+Misalnya, untuk melihat SSID dari jaringan Wi-Fi yang terhubung saat ini, Anda bisa menjalankan:
+
+```bash
+iwgetid -r
+```
+
+Jika Anda ingin melihat informasi yang lebih lengkap tentang koneksi Wi-Fi yang aktif:
+
+```bash
+nmcli connection show --active
+```
+
+Atau untuk melihat konfigurasi jaringan nirkabel:
+
+```bash
+iwconfig
+```
+
+Dengan menggunakan perintah-perintah ini di terminal Linux Mint Mate, Anda dapat dengan mudah memeriksa status dan informasi tentang jaringan Wi-Fi yang terhubung saat ini.
+
