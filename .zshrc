@@ -111,6 +111,7 @@ alias cwifi='~/Documents/Backups/cwifi.sh'
 alias rwifi='sudo systemctl restart NetworkManager'
 alias ofwifi='nmcli radio wifi off'
 alias onwifi='nmcli radio wifi on'
+alias wifi='nmcli connection show --active'
 
 # Docker and Podman management aliases
 alias dstop='sudo systemctl stop docker.socket && sudo systemctl stop docker'
