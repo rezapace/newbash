@@ -146,7 +146,8 @@ alias gnew='/home/r/Documents/Backups/gnew.sh'
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
 alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
 alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
-
+alias bon='cd /home/r/Documents/Backups && ./connect_bluetooth.sh'
+alias bof='cd /home/r/Documents/Backups && ./disconect_bluetooth.sh'
 
 # Functions
 mkdirg() {

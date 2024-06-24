@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=bof
+Exec=/home/r/Documents/Backups/disconect_bluetooth.sh
+Icon=folder
+Terminal=false

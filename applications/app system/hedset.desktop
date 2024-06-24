@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=hedset
+Exec=/home/r/Documents/Backups/connect_bluetooth.sh
+Icon=folder
+Terminal=false
