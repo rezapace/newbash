@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=gemini dokumentasi
+Exec=/usr/bin/google-chrome --new-tab https://ai.google.dev/gemini-api/docs?hl=id
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

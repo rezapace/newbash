@@ -21,7 +21,7 @@ plugins=(
   clvv/fasd
   wting/autojump
   trapd00r/LS_COLORS
-  Aloxaf/fzf-tab
+  # Aloxaf/fzf-tab
 )
 
 for plugin in "${plugins[@]}"; do
@@ -30,7 +30,10 @@ done
 
 # Load snippets
 snippets=(
-  git sudo archlinux aws kubectl kubectx command-not-found
+  git
+  sudo
+  archlinux
+  command-not-found
 )
 
 for snippet in "${snippets[@]}"; do
