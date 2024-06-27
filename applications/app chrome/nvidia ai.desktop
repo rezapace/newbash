@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=nvidia ai
+Exec=/usr/bin/google-chrome --new-tab https://build.nvidia.com/nvidia/nemotron-4-340b-instruct?snippet_tab=Shell
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

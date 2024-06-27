@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=reza folder
+Exec=caja /home/r/reza
+Icon=folder
+Terminal=true
