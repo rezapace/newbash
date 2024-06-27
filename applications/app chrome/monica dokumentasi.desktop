@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=monica dokumentasi
+Exec=/usr/bin/google-chrome --new-tab https://monica.im/help/Features/Bots/Introduction
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

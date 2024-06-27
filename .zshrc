@@ -277,6 +277,43 @@ ftext() {
 
 up() { [[ -z $1 || ! $1 =~ ^[0-9]+$ ]] && { print_error "Usage: up number_of_directories."; return 1; }; for ((i = 0; i < $1; i++)); do cd ..; done; }
 
+# # Fungsi untuk menampilkan fzf history search
+# fzf_history_search() {
+#   local selected
+#   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+#   selected=$(fc -rl 1 | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |
+#     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m --layout=reverse --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'" fzf)
+#   local ret=$?
+#   if [ -n "$selected" ]; then
+#     selected=$(echo "$selected" | sed 's/^[0-9 ]*//g')
+#     zle reset-prompt
+#     BUFFER="$selected"
+#     zle accept-line
+#   else
+#     zle reset-prompt
+#   fi
+#   return $ret
+# }
+
+
+# zle     -N   fzf_history_search
+# bindkey '^R' fzf_history_search
+
+# # Fungsi untuk menampilkan fzf history search saat prompt kosong
+# auto_fzf_history() {
+#   if [[ ${#BUFFER} -eq 0 ]]; then
+#     zle fzf_history_search
+#   fi
+# }
+
+# # Buat widget dari fungsi auto_fzf_history
+# zle -N auto_fzf_history
+
+# # Tambahkan widget ke zle-line-init hook
+# zle -N zle-line-init auto_fzf_history
+
+
+
 # Load fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 eval "$(fzf --zsh)"
