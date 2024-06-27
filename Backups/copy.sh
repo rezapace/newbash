@@ -38,4 +38,15 @@ git commit -m "update"
 # Melakukan push ke repository remote
 git push
 
+cd "/home/r/Documents/Obsidian Vault"
+
+# Menambahkan perubahan ke Git
+git add .
+
+# Melakukan commit dengan pesan "update"
+git commit -m "update"
+
+# Melakukan push ke repository remote
+git push
+
 echo "Perubahan telah ditambahkan, di-commit, dan di-push ke repository Git"
