@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=scursor
+Exec=sh -c '/home/r/Documents/Backups/scursor.sh'
+Icon=folder
+Terminal=false

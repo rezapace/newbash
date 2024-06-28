@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=shutdown
-Exec=systemctl pkexec /sbin/shutdown now
+Name=Shutdown
+Exec=/home/r/Documents/Backups/shutdown.sh
 Icon=/path/to/shutdown-icon.png
 Terminal=false
