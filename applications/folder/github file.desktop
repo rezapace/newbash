@@ -4,4 +4,4 @@ Type=Application
 Name=github folder
 Exec=caja /home/r/github
 Icon=folder
-Terminal=true
+Terminal=false
