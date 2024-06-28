@@ -2,6 +2,6 @@
 Version=1.0
 Type=Application
 Name=github folder
-Exec=nautilus /home/r/github
+Exec=caja /home/r/github
 Icon=folder
 Terminal=true
