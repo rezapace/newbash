@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=duckduck ai
+Exec=/usr/bin/google-chrome --new-tab https://duckduckgo.com/?q=DuckDuckGo&ia=chat
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome
