@@ -218,6 +218,12 @@ localhost() {
   /usr/bin/google-chrome --new-tab "$url"
 }
 
+gweb() {
+  local folderName=$(basename "$(pwd)")
+  local url="http://github.com/rezapace/$folderName/"
+  /usr/bin/google-chrome --new-tab "$url"
+}
+
 grr() {
   local url="https://github.com/rezapace?tab=repositories"
   /usr/bin/google-chrome --new-tab "$url"

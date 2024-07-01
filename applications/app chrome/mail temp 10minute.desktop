@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=mail temp 10minute
+Exec=/usr/bin/google-chrome --new-tab https://10minutemail.net/?lang=id
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome
