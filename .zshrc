@@ -132,6 +132,8 @@ alias profile='code ~/.zshrc'
 alias scode='sudo code --no-sandbox --user-data-dir'
 
 # Miscellaneous aliases
+alias balena='cd /opt && ./balenaEtcher-1.19.21-x64.AppImage'
+alias closefile='pkill caja'
 alias c='clear'
 alias e='caja .'
 alias ehtdoc='caja /var/www/html'
