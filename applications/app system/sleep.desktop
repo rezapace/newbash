@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=sleep
+Exec=systemctl suspend
+Icon=/usr/share/icons/hicolor/48x48/apps/suspend-icon.png
+Terminal=false

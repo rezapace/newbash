@@ -241,9 +241,16 @@ hp() {
   cd "$HOME/Documents/GitHub" && ./scrcpy -m720 -b30m
 }
 
-cursor() {
-  [[ -n "$1" ]] && cd "$1" && /opt/cursor.appimage || { echo "Usage: cursor <directory>"; return 1; }
+cr() {
+  local current_dir="$PWD"
+  cd /opt
+  sudo -E ./cursor.appimage --no-sandbox "$current_dir"
 }
+
+
+# cursor() {
+#   [[ -n "$1" ]] && cd "$1" && /opt/cursor.appimage || { echo "Usage: cursor <directory>"; return 1; }
+# }
 
 cdf() {
   local dir=$(find ${1:-.} -type d 2> /dev/null | fzf --height 40% --layout=reverse --border)
@@ -284,6 +291,11 @@ ftext() {
 }
 
 up() { [[ -z $1 || ! $1 =~ ^[0-9]+$ ]] && { print_error "Usage: up number_of_directories."; return 1; }; for ((i = 0; i < $1; i++)); do cd ..; done; }
+
+function vv() {
+  scursor "$1"
+}
+
 
 # # Fungsi untuk menampilkan fzf history search
 # fzf_history_search() {
