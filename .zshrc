@@ -87,6 +87,7 @@ fi
 # Directory navigation aliases
 alias www='cd /var/www/html'
 alias g='cd ~/github'
+alias d='cd /home/r/Downloads'
 alias home='cd ~'
 alias h='cd ~'
 alias htdoc='cd /var/www/html'

@@ -4,4 +4,4 @@ Type=Application
 Name=download folder
 Exec=caja /home/r/Downloads
 Icon=folder
-Terminal=true
+Terminal=false
