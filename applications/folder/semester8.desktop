@@ -4,4 +4,4 @@ Type=Application
 Name=folder semester8
 Exec=caja /home/r/semester8
 Icon=folder
-Terminal=true
+Terminal=false
