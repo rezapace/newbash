@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=porttainer
+Exec=/usr/bin/google-chrome --new-tab https://localhost:9443/#!/home
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

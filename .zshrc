@@ -117,14 +117,6 @@ alias ofwifi='nmcli radio wifi off'
 alias onwifi='nmcli radio wifi on'
 alias wifi='nmcli connection show --active'
 
-# Docker and Podman management aliases
-alias dstop='sudo systemctl stop docker.socket && sudo systemctl stop docker'
-alias pstop='sudo systemctl stop podman && sudo systemctl stop podman.socket'
-alias dstart='sudo systemctl start docker.socket && sudo systemctl start docker && log "Docker started" || log "Failed to start Docker"'
-alias pstart='sudo systemctl start podman && sudo systemctl start podman.socket && log "Podman started" || log "Failed to start Podman"'
-alias dstat='sudo systemctl status docker'
-alias pstat='sudo systemctl status podman'
-
 # Text editors and IDE aliases
 alias vim='nvim'
 alias v='code .'
@@ -155,6 +147,13 @@ alias addfolder='cd /home/r/.local/share/applications && ./addfd.sh'
 alias addconfig='cd /home/r/.local/share/applications && ./addsy.sh'
 alias bon='cd /home/r/Documents/Backups && ./connect_bluetooth.sh'
 alias bof='cd /home/r/Documents/Backups && ./disconect_bluetooth.sh'
+
+#docker
+alias fzf-docker='/home/r/Documents/Backups/docker_fzf.sh'
+alias fzf-preview='fzf --preview="batcat --color=always {}"'
+alias docker-podman-fzf='/home/r/Documents/Backups/docker_podman_fzf.sh'
+
+
 
 # Functions
 mkdirg() {
