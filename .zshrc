@@ -109,13 +109,13 @@ alias 777='chmod -R 777'
 # Network management aliases
 alias stwifi='systemctl status NetworkManager'
 alias startwifi='sudo systemctl start NetworkManager'
-alias lwifi='nmcli device wifi list'
-alias lswifi='nmcli device wifi rescan'
-alias cwifi='~/Documents/Backups/cwifi.sh'
 alias rwifi='sudo systemctl restart NetworkManager'
 alias ofwifi='nmcli radio wifi off'
 alias onwifi='nmcli radio wifi on'
+alias lwifi='nmcli device wifi list'
+alias lswifi='nmcli device wifi rescan'
 alias wifi='nmcli connection show --active'
+alias gwifi='/home/r/Documents/Backups/wifi_connect.sh'
 
 # Text editors and IDE aliases
 alias vim='nvim'
@@ -152,7 +152,11 @@ alias bof='cd /home/r/Documents/Backups && ./disconect_bluetooth.sh'
 alias fzf-docker='/home/r/Documents/Backups/docker_fzf.sh'
 alias fzf-preview='fzf --preview="batcat --color=always {}"'
 alias docker-podman-fzf='/home/r/Documents/Backups/docker_podman_fzf.sh'
-
+alias addsh='cd /home/r/Documents/Backups'
+alias packages='/home/r/Documents/Backups/manage_package.sh'
+alias files='/home/r/Documents/Backups/copy_move_file.sh'
+alias task='/home/r/Documents/Backups/manage_runing.sh'
+alias xampp='/home/r/Documents/Backups/xam.sh'
 
 
 # Functions

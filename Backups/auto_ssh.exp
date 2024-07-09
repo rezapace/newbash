@@ -1,0 +1,74 @@
+#!/usr/bin/expect -f
+
+# Set internal logging for debugging
+exp_internal 1
+log_user 1
+
+# Set variables
+set timeout 2
+set max_retries 2
+set retry_interval 2
+set host "s_01j25dadvwvbmvr1q6vmwedz8n@ssh.lightning.ai"
+set command_interval 2
+set initial_delay 3
+
+# Define the procedure to connect and execute commands
+proc connect_and_execute {} {
+    global host timeout command_interval initial_delay
+
+    puts "Attempting to connect to $host"
+    spawn ssh -o StrictHostKeyChecking=no $host
+
+    expect {
+        -re "⚡ ~.*$" {
+            puts "Successfully connected to the server."
+            puts "Waiting for $initial_delay seconds before starting command execution..."
+            sleep $initial_delay
+        }
+        timeout {
+            puts "Error: Connection attempt timed out."
+            return 0
+        }
+        eof {
+            puts "Error: SSH process ended unexpectedly."
+            return 0
+        }
+    }
+
+    puts "Starting command: python app.py"
+    send "python app.py\r"
+
+    expect {
+        eof {
+            puts "Program selesai, menjalankan lagi setelah $command_interval detik..."
+            sleep $command_interval
+            return 1
+        }
+        timeout {
+            puts "Error: Program tidak merespons dalam waktu yang diizinkan."
+            return 0
+        }
+    }
+}
+
+# Main loop
+while {1} {
+    set retry_count 0
+    while {$retry_count < $max_retries} {
+        puts "Attempt $retry_count of $max_retries"
+        if {[connect_and_execute]} {
+            incr retry_count 0
+        } else {
+            incr retry_count
+            if {$retry_count < $max_retries} {
+                puts "Retrying in $retry_interval seconds (Attempt $retry_count of $max_retries)..."
+                sleep $retry_interval
+            } else {
+                puts "Maximum retry attempts reached. Exiting and restarting..."
+                break
+            }
+        }
+    }
+    puts "Restarting the entire process..."
+    sleep $retry_interval
+}
