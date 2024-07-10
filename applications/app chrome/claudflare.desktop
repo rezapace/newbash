@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=claudflare
+Exec=/usr/bin/google-chrome --new-tab https://one.dash.cloudflare.com/a8cbef640e388196506bc0c82b3a7474/networks/tunnels?search=
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome
