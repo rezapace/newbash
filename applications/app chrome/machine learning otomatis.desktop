@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=machine learning otomatis
+Exec=/usr/bin/google-chrome --new-tab https://app.roboflow.com/reza-gkl6b
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome
