@@ -91,6 +91,8 @@ alias d='cd /home/r/Downloads'
 alias home='cd ~'
 alias h='cd ~'
 alias htdoc='cd /var/www/html'
+alias desktop='cd /home/r/Desktop'
+alias depan='cd /home/r/Desktop'
 
 # Directory listing and management aliases
 alias ls='exa --color=auto --group-directories-first'
@@ -158,7 +160,16 @@ alias packages='/home/r/Documents/Backups/manage_package.sh'
 alias files='/home/r/Documents/Backups/copy_move_file.sh'
 alias task='/home/r/Documents/Backups/manage_runing.sh'
 alias xampp='/home/r/Documents/Backups/xam.sh'
-
+alias fzf-zip='/home/r/Documents/Backups/fzf-zip.sh'
+alias fzf-hapus='/home/r/Documents/Backups/fzf-hapus.sh'
+alias fzf-move='/home/r/Documents/Backups/fzf-move.sh'
+alias fzf-htdoc='/home/r/Documents/Backups/fzf-move.sh'
+alias fzf-unzip='/home/r/Documents/Backups/fzf-unzip.sh'
+alias fzf-go='/home/r/Documents/Backups/fzf-go.sh'
+alias fzf-kill='/home/r/Documents/Backups/fzf-kill.sh'
+alias pp='/home/r/Documents/Backups/fzf-pro.sh'
+alias vp='/home/r/Documents/Backups/fzf-vscode.sh'
+alias fweb='/home/r/Documents/Backups/fzf-web.sh'
 
 # Functions
 mkdirg() {
