@@ -140,6 +140,7 @@ alias upprofile='cd /home/r/Documents/Backups && ./copy.sh'
 alias closeall='/home/r/Documents/Backups/close_programs.sh'
 alias fzip='/home/r/Documents/Backups/fzip.sh'
 alias gnew='/home/r/Documents/Backups/gnew.sh'
+alias vmware='sudo virt-manager'
 
 #myscript
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'

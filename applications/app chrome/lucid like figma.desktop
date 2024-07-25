@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=lucid like figma
+Exec=/usr/bin/google-chrome --new-tab https://lucid.app/documents#/documents?folder_id=recent
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

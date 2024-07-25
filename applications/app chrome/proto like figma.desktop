@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=proto like figma
+Exec=/usr/bin/google-chrome --new-tab https://kuku5y5uy.proto.io/editor/index.cfm?id=46eaf15e-4955-40b5-8196-8f5f2ab22ade
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

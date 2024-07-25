@@ -127,10 +127,50 @@ prompt_for_password() {
     echo "$password"
 }
 
+# Function to execute network management commands
+execute_network_command() {
+    local choice
+    local commands=("Show status of NetworkManager" "Start NetworkManager" "Restart NetworkManager" "Turn off WiFi radio" "Turn on WiFi radio" "List available WiFi networks" "Rescan WiFi networks" "Show active WiFi connections")
+
+    echo "\nNetwork Management Commands"
+    echo "--------------------------"
+    choice=$(printf '%s\n' "${commands[@]}" | fzf --prompt="Select a command to execute: " --height=40% --border)
+
+    case "$choice" in
+        "Show status of NetworkManager")
+            systemctl status NetworkManager
+            ;;
+        "Start NetworkManager")
+            sudo systemctl start NetworkManager
+            ;;
+        "Restart NetworkManager")
+            sudo systemctl restart NetworkManager
+            ;;
+        "Turn off WiFi radio")
+            nmcli radio wifi off
+            ;;
+        "Turn on WiFi radio")
+            nmcli radio wifi on
+            ;;
+        "List available WiFi networks")
+            nmcli device wifi list
+            ;;
+        "Rescan WiFi networks")
+            nmcli device wifi rescan
+            ;;
+        "Show active WiFi connections")
+            nmcli connection show --active
+            ;;
+        *)
+            echo "Invalid command or no selection made."
+            ;;
+    esac
+}
+
 # Main menu function
 main_menu() {
     local choice
-    local options=("Select WiFi to Connect" "Exit")
+    local options=("Select WiFi to Connect" "Execute Network Management Commands" "Exit")
     
     while true; do
         echo "\nWiFi Connection Menu"
@@ -145,6 +185,9 @@ main_menu() {
                 else
                     echo "No WiFi SSID selected. Returning to main menu."
                 fi
+                ;;
+            "Execute Network Management Commands")
+                execute_network_command
                 ;;
             "Exit")
                 echo "Exiting program."
