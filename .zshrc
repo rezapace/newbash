@@ -171,7 +171,8 @@ alias pp='/home/r/Documents/Backups/fzf-pro.sh'
 alias vp='/home/r/Documents/Backups/fzf-vscode.sh'
 alias fweb='/home/r/Documents/Backups/fzf-web.sh'
 alias balik='/home/r/Documents/Backups/fzf-balik.sh'
-
+alias fzf-hp='/home/r/Documents/Backups/fzf-hapus1.sh'
+alias pasang='apt-cache search . | fzf | awk '{print $1}' | xargs -r sudo apt install'
 # Alias untuk menyimpan direktori saat ini ke dalam riwayat
 alias save_dir='source /home/r/Documents/Backups/dir_history.sh save'
 
