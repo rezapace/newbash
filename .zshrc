@@ -170,6 +170,14 @@ alias fzf-kill='/home/r/Documents/Backups/fzf-kill.sh'
 alias pp='/home/r/Documents/Backups/fzf-pro.sh'
 alias vp='/home/r/Documents/Backups/fzf-vscode.sh'
 alias fweb='/home/r/Documents/Backups/fzf-web.sh'
+alias balik='/home/r/Documents/Backups/fzf-balik.sh'
+
+# Alias untuk menyimpan direktori saat ini ke dalam riwayat
+alias save_dir='source /home/r/Documents/Backups/dir_history.sh save'
+
+# Alias untuk kembali ke direktori dari riwayat
+alias balik='source /home/r/Documents/Backups/dir_history.sh back'
+
 
 # Functions
 mkdirg() {
