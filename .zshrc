@@ -273,6 +273,12 @@ cr() {
   sudo -E ./cursor.appimage --no-sandbox "$current_dir"
 }
 
+cram() {
+  local current_dir="$PWD"
+  cd /tmp/ramdisk
+  sudo -E ./cursor.appimage --no-sandbox "$current_dir"
+}
+
 
 # cursor() {
 #   [[ -n "$1" ]] && cd "$1" && /opt/cursor.appimage || { echo "Usage: cursor <directory>"; return 1; }
