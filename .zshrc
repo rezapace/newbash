@@ -178,6 +178,7 @@ alias save_dir='source /home/r/Documents/Backups/dir_history.sh save'
 
 # Alias untuk kembali ke direktori dari riwayat
 alias balik='source /home/r/Documents/Backups/dir_history.sh back'
+alias fupdate='sudo apt update && sudo apt upgrade -y'
 
 
 # Functions
