@@ -87,6 +87,7 @@ fi
 # Directory navigation aliases
 alias www='cd /var/www/html'
 alias g='cd ~/github'
+alias dd='cd ~/docker'
 alias d='cd /home/r/Downloads'
 alias home='cd ~'
 alias h='cd ~'
@@ -154,6 +155,7 @@ alias bon='cd /home/r/Documents/Backups && ./connect_bluetooth.sh'
 alias bof='cd /home/r/Documents/Backups && ./disconect_bluetooth.sh'
 
 #docker
+alias fzf-dockerfile='/home/r/Documents/Backups/fzf-dockerfile.sh'
 alias fzf-docker='/home/r/Documents/Backups/docker_fzf.sh'
 alias fzf-preview='fzf --preview="batcat --color=always {}"'
 alias docker-podman-fzf='/home/r/Documents/Backups/docker_podman_fzf.sh'

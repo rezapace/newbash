@@ -70,10 +70,9 @@ disable_docker() {
 run_docker() {
     image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf --prompt="Select Docker Image to Run: " --height=20% --border)
     if [ -n "$image" ]; then
-        read -p "Enter container name: " container_name
-        docker run -d -p 3306:3306 -p 8080:80 --name "$container_name" "$image" /bin/bash -c "service apache2 start && service mysql start && tail -f /dev/null"
+        docker run -d $image
         if [ $? -eq 0 ]; then
-            echo "Docker container $container_name started from image $image."
+            echo "Docker container started from image $image."
         else
             echo "Failed to start Docker container from image $image."
         fi
@@ -157,47 +156,9 @@ list_images() {
     docker images
 }
 
-# Function to copy a folder to a Docker container
-copy_folder_to_docker() {
-    source_folder=$(find /home/r/github -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select source folder: " --height=40% --border --header="Source Folders")
-    container=$(docker ps --format '{{.Names}}' | fzf --prompt="Select Docker container: " --height=40% --border --header="Docker Containers")
-
-    if [[ -n "$source_folder" && -n "$container" ]]; then
-        docker cp "$source_folder/." "$container:/var/www/html"
-        echo "Folder $source_folder has been copied to /var/www/html in Docker container $container."
-    else
-        echo "No source folder or Docker container selected. Exiting."
-        exit 1
-    fi
-}
-
-# Function to export a Docker container
-export_docker_container() {
-    container=$(docker ps -a --format '{{.Names}}' | fzf --prompt="Select Docker container to export: " --height=20% --border)
-    if [ -n "$container" ]; then
-        read -p "Enter output file name (without extension): " output
-        docker export -o "${output}.tar" "$container"
-        echo "Docker container $container has been exported to ${output}.tar."
-    else
-        echo "No container selected."
-    fi
-}
-
-# Function to import a Docker container
-import_docker_container() {
-    tar_file=$(find . -name "*.tar" | fzf --prompt="Select tar file to import: " --height=20% --border)
-    if [ -n "$tar_file" ]; then
-        read -p "Enter name for imported Docker image: " image_name
-        docker import "$tar_file" "$image_name"
-        echo "Docker image imported as $image_name."
-    else
-        echo "No tar file selected."
-    fi
-}
-
 # Main function to select the action
 main_menu() {
-    echo -e "Start Docker\nStop Docker\nRestart Docker\nCheck Docker Status\nEnable Docker on Boot\nDisable Docker on Boot\nRun Docker Image\nExec into Running Container\nStop Running Container\nRemove Docker Container\nRemove Docker Image\nView Container Logs\nList All Containers\nList All Images\nCopy Folder to Docker\nExport Docker Container\nImport Docker Container" | fzf --prompt="Select Action: " --height=20% --border
+    echo -e "Start Docker\nStop Docker\nRestart Docker\nCheck Docker Status\nEnable Docker on Boot\nDisable Docker on Boot\nRun Docker Image\nExec into Running Container\nStop Running Container\nRemove Docker Container\nRemove Docker Image\nView Container Logs\nList All Containers\nList All Images" | fzf --prompt="Select Action: " --height=20% --border
 }
 
 # Select the action and execute the corresponding function
@@ -245,15 +206,6 @@ case "$action" in
         ;;
     "List All Images")
         list_images
-        ;;
-    "Copy Folder to Docker")
-        copy_folder_to_docker
-        ;;
-    "Export Docker Container")
-        export_docker_container
-        ;;
-    "Import Docker Container")
-        import_docker_container
         ;;
     *)
         echo "Invalid action selected"
