@@ -8,7 +8,7 @@ fi
 
 # Function to import a Docker container
 import_docker_container() {
-    tar_file=$(find . -name "*.tar" | fzf --prompt="Select tar file to import: " --height=20% --border)
+    tar_file=$(find /home/r/docker -name "*.tar" | fzf --prompt="Select tar file to import: " --height=20% --border)
     if [ -n "$tar_file" ]; then
         read -p "Enter name for imported Docker image: " image_name
         docker import "$tar_file" "$image_name"

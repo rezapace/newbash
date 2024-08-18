@@ -183,6 +183,18 @@ alias save_dir='source /home/r/Documents/Backups/dir_history.sh save'
 # Alias untuk kembali ke direktori dari riwayat
 alias balik='source /home/r/Documents/Backups/dir_history.sh back'
 alias fupdate='sudo apt update && sudo apt upgrade -y'
+alias fzf-dataimport='/home/r/Documents/Backups/import_database.sh'
+alias fzf-dataexport='/home/r/Documents/Backups/export-database.sh'
+alias fzf-xampp='/home/r/Documents/Backups/fzf-xampp.sh'
+
+# Docker New Alias
+alias d-mod='cd /home/r/Documents/Backups && ./mod-docker.sh'
+alias d-rm='cd /home/r/Documents/Backups && ./rm-docker.sh'
+alias d-remove='cd /home/r/Documents/Backups && ./rm-docker.sh'
+alias d-run='cd /home/r/Documents/Backups && ./run-docker.sh'
+alias d-import='cd /home/r/Documents/Backups && ./import-docker.sh'
+alias d-export='cd /home/r/Documents/Backups && ./export-docker.sh'
+alias d-copy='cd /home/r/Documents/Backups && ./copy-docker.sh'
 
 
 # Functions
