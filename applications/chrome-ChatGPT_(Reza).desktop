@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ChatGPT (Reza)
+Exec=/opt/google/chrome/google-chrome --profile-directory=Default --ignore-profile-directory-if-not-exists https://chatgpt.com/
+Icon=/home/r/.config/google-chrome/Default/Web Shortcut Icons/shortcut-a2b7c1160d7f6eda8be66e2e3e5a9f82.png
+URL=https://chatgpt.com/
+Comment=Open https://chatgpt.com/ in a new tab in Google Chrome.

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=add folder
+Exec=/home/r/.local/share/applications/folder
+Icon=folder
+Terminal=false
+

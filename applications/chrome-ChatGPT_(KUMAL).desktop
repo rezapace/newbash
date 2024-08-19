@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ChatGPT (KUMAL)
+Exec=/opt/google/chrome/google-chrome "--profile-directory=Profile 1" --ignore-profile-directory-if-not-exists https://chatgpt.com/c/945fd400-a833-465c-90d8-c822998cd4fc
+Icon=/home/r/.config/google-chrome/Profile 1/Web Shortcut Icons/shortcut-37cb60cac8897e05b61d5a787be0d099.png
+URL=https://chatgpt.com/c/945fd400-a833-465c-90d8-c822998cd4fc
+Comment=Open https://chatgpt.com/c/945fd400-a833-465c-90d8-c822998cd4fc in a new tab in Google Chrome.

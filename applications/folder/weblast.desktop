@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=weblast
+Exec=caja /home/r/reza/WeBlast
+Icon=folder
+Terminal=false
+
