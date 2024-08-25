@@ -39,8 +39,8 @@ delete_note() {
 
 # Fungsi untuk mencari dan menyalin notes
 search_note() {
-    # Pilih note berdasarkan judul
-    selected=$(jq -r '.[] | "\(.title): \(.command)"' "$NOTES_FILE" | fzf --prompt="Pilih notes untuk ditampilkan: " --height=20% --border)
+    # Gabungkan title dan command agar bisa dicari menggunakan fzf
+    selected=$(jq -r '.[] | "\(.title): \(.command)"' "$NOTES_FILE" | fzf --prompt="Cari notes berdasarkan judul/perintah: " --height=20% --border)
 
     if [ -n "$selected" ]; then
         title=$(echo "$selected" | awk -F: '{print $1}')

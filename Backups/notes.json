@@ -1,1 +1,6 @@
-[]
+[
+  {
+    "title": "menjalankan docker",
+    "command": "sudo docker start"
+  }
+]
