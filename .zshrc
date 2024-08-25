@@ -146,6 +146,7 @@ alias fzip='/home/r/Documents/Backups/fzip.sh'
 alias gnew='/home/r/Documents/Backups/gnew.sh'
 alias gnewp='/home/r/Documents/Backups/gnewp.sh'
 alias vmware='sudo virt-manager'
+alias note='/home/r/Documents/Backups/notes.sh'
 
 #myscript
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
