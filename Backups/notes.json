@@ -2,5 +2,9 @@
   {
     "title": "menjalankan docker",
     "command": "sudo docker start"
+  },
+  {
+    "title": "cara run docker",
+    "command": "docker run -it -p 3306:3306 -p 8080:80 --name reza reza /bin/sh"
   }
 ]
