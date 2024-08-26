@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# Function untuk menampilkan error dan keluar
+error_exit() {
+  echo "Error: $1" 1>&2
+  exit 1
+}
+
+# Function untuk validasi apakah Docker sudah berjalan
+check_docker() {
+  if ! [ -x "$(command -v docker)" ]; then
+    error_exit "Docker tidak ditemukan, pastikan Docker sudah terinstal."
+  fi
+  
+  if ! systemctl is-active --quiet docker; then
+    error_exit "Docker tidak berjalan, mohon jalankan Docker terlebih dahulu."
+  fi
+}
+
+# Function untuk validasi nama container
+validate_container_name() {
+  local name=$1
+  if [[ ! $name =~ ^[a-zA-Z0-9_-]+$ ]]; then
+    error_exit "Nama container tidak valid, hanya boleh menggunakan karakter alfanumerik, garis bawah, atau tanda minus."
+  fi
+}
+
+# Function untuk logging
+log_info() {
+  echo "INFO: $1"
+}
+
+# Step 1: Cek apakah Docker sudah berjalan
+check_docker
+
+# Step 2: Input nama container dari user
+read -p "Masukkan nama container yang diinginkan: " container_name
+validate_container_name "$container_name"
+
+# Step 3: Validasi apakah nama container sudah digunakan
+if [ "$(docker ps -aq -f name=^${container_name}$)" ]; then
+  read -p "Container '$container_name' sudah ada. Apakah Anda ingin menghapus container lama? (y/n): " remove_container
+  if [ "$remove_container" == "y" ]; then
+    docker rm -f $container_name || error_exit "Gagal menghapus container lama."
+    log_info "Container lama '$container_name' dihapus."
+  else
+    error_exit "Container sudah ada, hentikan script."
+  fi
+fi
+
+# Step 4: Import Docker image sesuai nama container dari user
+if [ ! -f devreza.tar ]; then
+  error_exit "File Docker image 'devreza.tar' tidak ditemukan."
+fi
+docker import devreza.tar $container_name || error_exit "Gagal mengimpor Docker image."
+log_info "Image Docker diimpor dengan nama '$container_name'."
+
+# Step 5: Jalankan Docker dengan port forwarding dan service restart (apache2 dan mysql)
+docker run -d -p 3306:3306 -p 8080:80 -p 8000:8000 --name $container_name $container_name /bin/bash -c "service apache2 restart && service mysql restart && tail -f /dev/null" || error_exit "Gagal menjalankan container Docker."
+log_info "Container '$container_name' berhasil dijalankan."
+
+# Step 6: Input lokasi file yang ingin di-copy dari user dan validasi apakah file/direktori ada
+read -p "Masukkan lokasi file di local yang ingin di-copy (contoh: /home/r/github/template-lms/): " file_path
+if [ ! -d "$file_path" ]; then
+  error_exit "Direktori $file_path tidak ditemukan."
+fi
+
+# Step 7: Copy file ke dalam container
+docker cp "$file_path" "$container_name":/var/www/ || error_exit "Gagal menyalin file ke container Docker."
+log_info "File dari '$file_path' berhasil dicopy ke '/var/www/' di container."
+
+# Step 8: Input lokasi file SQL dan nama database dari file SQL yang diinput user
+read -p "Masukkan lokasi file SQL (contoh: /home/r/github/template-lms/demo_db.sql): " sql_path
+if [ ! -f "$sql_path" ]; then
+  error_exit "File SQL $sql_path tidak ditemukan."
+fi
+if [ ! -s "$sql_path" ]; then
+  error_exit "File SQL $sql_path kosong."
+fi
+
+# Step 9: Ambil nama file SQL dan buat database dengan nama file SQL sebagai database
+db_name=$(basename "$sql_path" .sql)
+
+# Step 10: Buat database dengan nama file SQL dan otomatis gunakan username root dan password p
+docker exec -i $container_name mysql -u root -pp -e "CREATE DATABASE $db_name;" || error_exit "Gagal membuat database $db_name."
+docker exec -i $container_name mysql -u root -pp $db_name < $sql_path || error_exit "Gagal mengimpor database $db_name."
+log_info "Database '$db_name' berhasil dibuat dan diimpor."
+
+# Step 11: Tanya apakah user ingin menjalankan Laravel
+read -p "Apakah Anda menggunakan Laravel? (y/n): " laravel_response
+if [ "$laravel_response" == "y" ]; then
+  app_dir=$(basename "$file_path")
+  
+  # Menjalankan Laravel menggunakan php artisan serve
+  docker exec -it $container_name bash -c "cd /var/www/$app_dir && php artisan serve --host=0.0.0.0" || error_exit "Gagal menjalankan Laravel."
+  log_info "Laravel dijalankan di '$app_dir'."
+fi
+
+echo "Proses selesai. Docker container '$container_name' telah berjalan."

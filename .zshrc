@@ -197,6 +197,7 @@ alias d-import='cd /home/r/Documents/Backups && ./import-docker.sh'
 alias d-export='cd /home/r/Documents/Backups && ./export-docker.sh'
 alias d-copy='cd /home/r/Documents/Backups && ./copy-docker.sh'
 alias d-move='cd /home/r/Documents/Backups && ./copy-docker.sh'
+alias d-auto='/home/r/Documents/Backups/docker-auto.sh'
 
 # Functions
 mkdirg() {
