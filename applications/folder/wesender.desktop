@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=wesender
+Exec=caja "/home/r/github/Bisnis/WeSender WASender Free Plugin"
+Icon=folder
+Terminal=false

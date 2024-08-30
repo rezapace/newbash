@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=weblast
-Exec=caja /home/r/reza/WeBlast
+Exec=caja "/home/r/github/Bisnis/Weblast Premium Sender Plus"
 Icon=folder
 Terminal=false
 
