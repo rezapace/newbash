@@ -147,6 +147,8 @@ alias gnew='/home/r/Documents/Backups/gnew.sh'
 alias gnewp='/home/r/Documents/Backups/gnewp.sh'
 alias vmware='sudo virt-manager'
 alias note='/home/r/Documents/Backups/notes.sh'
+alias pchrome='caja /home/r/.config/google-chrome/Default/Extensions'
+alias zen='cd /opt && ./zen.AppImage'
 
 #myscript
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'

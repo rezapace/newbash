@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=zen browser
+Exec=sh -c '/home/r/Documents/Backups/zen.sh'
+Icon=folder
+Terminal=false

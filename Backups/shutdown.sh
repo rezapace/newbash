@@ -1,2 +1,5 @@
 #!/bin/bash
-pkexec shutdown -h now
+sudo /sbin/shutdown -h now
+
+
+#pkexec shutdown -h now
