@@ -149,6 +149,9 @@ alias vmware='sudo virt-manager'
 alias note='/home/r/Documents/Backups/notes.sh'
 alias pchrome='caja /home/r/.config/google-chrome/Default/Extensions'
 alias zen='cd /opt && ./zen.AppImage'
+alias weblast='caja "/home/r/github/Bisnis/Weblast Premium Sender Plus"'
+alias wesender='caja "/home/r/github/Bisnis/WeSender WASender Free Plugin"'
+alias webulk='caja "/home/r/github/Bisnis/WeBulk Prime Sender"'
 
 #myscript
 alias addlink='cd /home/r/.local/share/applications && ./addlk.sh'
