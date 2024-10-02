@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=groupy file
+Exec=caja /home/r/github/groupy
+Icon=folder
+Terminal=false
+

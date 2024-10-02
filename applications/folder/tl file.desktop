@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=tl file
+Exec=caja /home/r/github/toolabs
+Icon=folder
+Terminal=false
+
