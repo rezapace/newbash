@@ -1,0 +1,7 @@
+   [Desktop Entry]
+   Version=1.0
+   Type=Application
+   Name=creza
+   Exec=/opt/google/chrome/google-chrome --profile-directory="Default"
+   Icon=/home/r/.config/google-chrome/Profile 4/Web Shortcut Icons/shortcut-icon.png
+   Comment=Open Google Chrome with Profile 2

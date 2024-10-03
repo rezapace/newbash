@@ -1,0 +1,7 @@
+   [Desktop Entry]
+   Version=1.0
+   Type=Application
+   Name=ckumal
+   Exec=/opt/google/chrome/google-chrome --profile-directory="Profile 1"
+   Icon=/home/r/.config/google-chrome/Profile 1/Web Shortcut Icons/shortcut-icon.png
+   Comment=Open Google Chrome with Profile 1
