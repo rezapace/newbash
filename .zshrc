@@ -308,6 +308,21 @@ cram() {
 #   [[ -n "$1" ]] && cd "$1" && /opt/cursor.appimage || { echo "Usage: cursor <directory>"; return 1; }
 # }
 
+cdg() {
+  local dir=$(find /home/r/github -maxdepth 1 -type d 2>/dev/null | fzf --height 40% --layout=reverse --border)
+  if [[ -n "$dir" ]]; then
+    cd "$dir"
+    zle reset-prompt  # Refresh the prompt in zsh (not needed for bash)
+  else
+    echo "No directory selected."
+    return 1
+  fi
+}
+
+# zsh keybinding for Ctrl+g
+zle -N cdg
+bindkey '^g' cdg
+
 cdf() {
   local dir=$(find ${1:-.} -type d 2> /dev/null | fzf --height 40% --layout=reverse --border)
   [[ -n "$dir" ]] && cd "$dir" && zle reset-prompt || { echo "No directory selected."; return 1; }
@@ -351,6 +366,8 @@ up() { [[ -z $1 || ! $1 =~ ^[0-9]+$ ]] && { print_error "Usage: up number_of_dir
 function vv() {
   scursor "$1"
 }
+
+
 
 
 # # Fungsi untuk menampilkan fzf history search
