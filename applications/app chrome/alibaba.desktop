@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=alibaba
+Exec=/usr/bin/google-chrome --new-tab https://account.alibabacloud.com/login/login.htm?oauth_callback=https%3A%2F%2Fecs.console.aliyun.com%2Fserver%2Fi-t4n9dxzuxa46o1o750k7%2Fmonitor%3FregionId%3Dap-southeast-1&lang=en
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome

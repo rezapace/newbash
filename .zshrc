@@ -204,6 +204,9 @@ alias d-copy='cd /home/r/Documents/Backups && ./copy-docker.sh'
 alias d-move='cd /home/r/Documents/Backups && ./copy-docker.sh'
 alias d-auto='/home/r/Documents/Backups/docker-auto.sh'
 
+# Conect server
+alias skumal='cd /home/r/Documents/Backups && ./auto_ssh.sh'
+
 # Functions
 mkdirg() {
   [[ -n "$1" ]] && mkdir -p "$1" && cd "$1" || { echo "Usage: mkdirg <directory_name>"; return 1; }

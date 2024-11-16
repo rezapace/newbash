@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=smidtrans
+Exec=/usr/bin/google-chrome --new-tab https://dashboard.sandbox.midtrans.com/settings/general_info
+Icon=chrome-fmgjjmmmlfnkbppncabfkddbjimcfncm-Default
+StartupWMClass=Google-chrome
