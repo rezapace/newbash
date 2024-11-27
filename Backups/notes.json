@@ -6,5 +6,13 @@
   {
     "title": "cara run docker",
     "command": "docker run -it -p 3306:3306 -p 8080:80 --name reza reza /bin/sh"
+  },
+  {
+    "title": "menjalankan docker postgre",
+    "command": "❯ docker run -d -p 5432:5432 -p 8080:80 -p 9200:9200 --name metools gopostgre:latest /bin/bash -c \"service postgresql start && tail -f /dev/null\""
+  },
+  {
+    "title": "carakerja",
+    "command": "bagai mana cara kerja program ini jelaskan perpoint tanpa program nya hanya cara kerja dan flow program"
   }
 ]
